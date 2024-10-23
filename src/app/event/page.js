@@ -20,7 +20,7 @@ export default function Map() {
   const divRef = useRef(null);
 
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCPJKZqcuw4yy1bTTxk7S__J0Mg8a-8OAE",
+    googleMapsApiKey: "Insert Key",
     libraries: libraries,
   });
 
