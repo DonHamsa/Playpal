@@ -1,0 +1,12 @@
+.image{
+    /* border: red 1px solid; */
+    /* padding: 0px; */
+    /* margin :0; */
+}
+
+.imageBlock{
+    width:99.8%;
+    /* border: red 1px solid; */
+    display: flex;
+    justify-content: center;    
+}

@@ -1,0 +1,65 @@
+.fieldset{
+    border: none
+}
+
+.form{
+    /* border: red solid 1px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 25px;
+    margin-left: 15px
+    
+}
+
+
+.logIn{
+    font-size: 25px;
+    font-family: Montserrat;
+    font-weight: 600;
+    /* border: red 1px solid */
+}
+
+.para{
+    font-size: 17px;
+    font-family: Montserrat;
+    font-weight: 300;
+    margin-right: 25px;
+}
+
+.label{
+    /* border: red solid 1px; */
+    display: block;
+    font-family: Montserrat;
+
+ 
+}
+
+
+.input{
+    /* border: red 1px solid; */
+    display: block;
+    background: rgb(203, 202, 202);
+    border: none;
+    width: 298px;
+    border-radius: 5px;
+    margin: 10px 0;
+    height: 25px
+
+}
+
+.button{
+    background: #4FACEF; 
+    border: none;
+    border-radius: 5px;
+    line-height: 30px;
+    margin:0px;
+    margin-top: 10px;
+    width:303px;
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 20px
+
+}
+

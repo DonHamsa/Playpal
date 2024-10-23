@@ -1,0 +1,17 @@
+.marker {
+  color: grey;
+  height: 14px;
+  margin-right: 10px;
+}
+
+.nameBox {
+  /* border: red 1px solid; */
+  font-size: 13px;
+  font-weight: 500;
+  color: grey
+}
+
+.nameBox:hover .marker{
+  color: rgb(37, 152, 246)
+}
+

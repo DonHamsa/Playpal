@@ -1,0 +1,10 @@
+.gm-style .gmnoprint, .gm-style .gm-style-cc {
+  display: none;
+}
+
+.mapBlock{
+  /* border: red 1px solid; */
+  display: flex;
+  justify-content: center;
+}
+
