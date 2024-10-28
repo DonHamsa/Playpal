@@ -8,10 +8,17 @@
   /* border: red 1px solid; */
   font-size: 13px;
   font-weight: 500;
-  color: grey
+  height: 60px;
+  margin:auto 0 auto
+
+}
+
+.nameBox:hover{
+  color: black;
+
 }
 
 .nameBox:hover .marker{
-  color: rgb(37, 152, 246)
+  color: rgba(0, 186, 12, 0.846)
 }
 

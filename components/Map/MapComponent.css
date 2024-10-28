@@ -1,5 +1,6 @@
 .gm-style .gmnoprint, .gm-style .gm-style-cc {
   display: none;
+
 }
 
 .mapBlock{
@@ -7,4 +8,11 @@
   display: flex;
   justify-content: center;
 }
+
+.mapBox{
+  /* border: red 1px solid; */
+  border-radius: 25px;
+  box-shadow: 3px 3px 10px;
+}
+
 

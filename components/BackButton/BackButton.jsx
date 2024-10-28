@@ -6,17 +6,22 @@ export default function BackButton({
   setUserParkOption,
   setHoverPark,
   userParkOption,
+  setUserSelectParkStatus,
+  userSelectParkStatus
 }) {
   const onClickHandler = () => {
+    if (userSelectParkStatus && userParkOption) {
+      console.log('hello')
+      setUserSelectParkStatus(false)
+      return 
+    }
+
     if (userParkOption) {
       setUserParkOption(false);
-
-
 
     } else {
       setParksLocation([]);
       setHoverPark([]);
-
     }
   };
 

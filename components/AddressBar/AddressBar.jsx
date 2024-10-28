@@ -14,6 +14,7 @@ export default function AddressBar({scriptLoaded, loadError, userLocationFunctio
 
     const options = {
       fields: ["address_components", "geometry", ],
+      componentRestrictions: { country: "gb" }
     };
 
     const autocomplete = new google.maps.places.Autocomplete(inputRef.current, options);

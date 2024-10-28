@@ -14,7 +14,6 @@ const defaultMapContainerStyle = {
   width: "400px",
   height: "380px",
   borderRadius: "25px 25px 25px 25px",
-  border: "black 1px solid",
 };
 
 const defaultMapCenter = {
@@ -56,7 +55,14 @@ const changeOuterBounds = (mapRef) => {
   ];
 };
 
-const MapComponent = ({ userAddress, scriptLoaded, setParksLocation, parks, setParks, hoverPark}) => {
+const MapComponent = ({
+  userAddress,
+  scriptLoaded,
+  setParksLocation,
+  parks,
+  setParks,
+  hoverPark,
+}) => {
   // console.log(userAddress)
   const mapRef = useRef(null);
   const radius = 2000;
@@ -69,7 +75,6 @@ const MapComponent = ({ userAddress, scriptLoaded, setParksLocation, parks, setP
   if (parks.length !== 0) {
     defaultMapZoom = 13;
   }
-
 
   useEffect(() => {
     if (userAddress && mapRef) {
@@ -151,11 +156,10 @@ const MapComponent = ({ userAddress, scriptLoaded, setParksLocation, parks, setP
 
   const createMarkers = useMemo(() => {
     let list;
-    if (hoverPark.length===0){
-      list= parks
-    }
-    else{
-      list=[hoverPark]
+    if (hoverPark.length === 0) {
+      list = parks;
+    } else {
+      list = [hoverPark];
     }
     return list.map((park) => {
       return (
@@ -175,35 +179,36 @@ const MapComponent = ({ userAddress, scriptLoaded, setParksLocation, parks, setP
 
   return (
     <div className="mapBlock">
-      <GoogleMap
-        mapContainerStyle={defaultMapContainerStyle}
-        center={userAddress || defaultMapCenter}
-        zoom={defaultMapZoom}
-        options={defaultMapOptions}
-        onLoad={(map) => {
-          
-          mapRef.current = map;
-        }}
-        onIdle={handleDrag}
-        onDrag={handleDrag}
-        onZoomChanged={handleDrag}
-      >
-        {circlePath && outerBounds && (
-          <>
-            <Polygon
-              paths={[circlePath, outerBounds]}
-              options={{
-                strokeColor: "#000000",
-                strokeOpacity: 0.8,
-                strokeWeight: 0,
-                fillColor: "#000000",
-                fillOpacity: 0.9,
-              }}
-            />
-          </>
-        )}
-        {parks.length !== 0 && createMarkers}
-      </GoogleMap>
+      <div className="mapBox">
+        <GoogleMap
+          mapContainerStyle={defaultMapContainerStyle}
+          center={userAddress || defaultMapCenter}
+          zoom={defaultMapZoom}
+          options={defaultMapOptions}
+          onLoad={(map) => {
+            mapRef.current = map;
+          }}
+          onIdle={handleDrag}
+          onDrag={handleDrag}
+          onZoomChanged={handleDrag}
+        >
+          {circlePath && outerBounds && (
+            <>
+              <Polygon
+                paths={[circlePath, outerBounds]}
+                options={{
+                  strokeColor: "#000000",
+                  strokeOpacity: 0.8,
+                  strokeWeight: 0,
+                  fillColor: "#000000",
+                  fillOpacity: 0.9,
+                }}
+              />
+            </>
+          )}
+          {parks.length !== 0 && createMarkers}
+        </GoogleMap>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Header from "@/../components/Header/Header";
 import FooterTwo from "../../../components/FooterTwo/FooterTwo";
 import LocationBox from "../../../components/LocationBox/LocationBox";
 import BackButton from "../../../components/BackButton/BackButton";
+import OptionPage from "../../../components/OptionPage/OptionPage";
 
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useState, useRef, useEffect } from "react";
@@ -17,20 +18,19 @@ export default function Map() {
   const [parks, setParks] = useState([]);
   const [hoverPark, setHoverPark] = useState([]);
   const [userParkOption, setUserParkOption] = useState(false);
+  const [userSelectParkStatus, setUserSelectParkStatus] = useState(false);
   const divRef = useRef(null);
 
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCPJKZqcuw4yy1bTTxk7S__J0Mg8a-8OAE",
+    googleMapsApiKey: "AIzaSyChG76dCtgyEkKvEtYNt8eQDWjUaP42A0o",
     libraries: libraries,
   });
 
   useEffect(() => {
     if (divRef.current) {
       divRef.current.classList.add("mapNList");
-      if (!userParkOption && parksLocation.length===0) {
-        console.log('drbvrtbjnerbn')
+      if (!userParkOption && parksLocation.length === 0) {
         divRef.current.classList.remove("mapNList");
-        console.log(divRef.current.classList);
       }
     }
   }, [parksLocation, userParkOption]);
@@ -50,7 +50,7 @@ export default function Map() {
 
         {scriptLoaded && (
           <>
-            <div ref={divRef} className={userParkOption ? "hide" : "show"}>
+            <div ref={divRef} className={userParkOption && !userSelectParkStatus ? "hide" : "show"}>
               <MapComponent
                 userAddress={userManualAddress}
                 loadedState={scriptLoaded}
@@ -59,23 +59,29 @@ export default function Map() {
                 setParks={setParks}
                 hoverPark={hoverPark}
               />
-              {parksLocation.length !== 0 && (
+              {(parksLocation.length !== 0 && !userSelectParkStatus)  && (
                 <LocationBox
                   parks={parksLocation}
                   allParks={parks}
                   setHoverPark={setHoverPark}
                   setUserParkOption={setUserParkOption}
+                  hoverPark={hoverPark}
                 />
               )}
             </div>
+            {userParkOption && !userSelectParkStatus && (
+              <OptionPage setUserSelectParkStatus={setUserSelectParkStatus} />
+            )}
 
             {parksLocation.length !== 0 && (
               <BackButton
+                setUserSelectParkStatus={setUserSelectParkStatus}
                 setParksLocation={setParksLocation}
                 divRef={divRef.current}
                 setUserParkOption={setUserParkOption}
                 setHoverPark={setHoverPark}
                 userParkOption={userParkOption}
+                userSelectParkStatus={userSelectParkStatus}
               />
             )}
           </>
