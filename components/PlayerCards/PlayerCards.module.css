@@ -1,0 +1,54 @@
+.playerCard{
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  /* border: red 1px solid; */
+}
+
+
+.outsideCardWithBall {
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(233, 232, 232);
+  margin-bottom: 15px;
+  padding: 10px;
+  padding-left: 13px;
+  border-left: 3px solid rgb(73, 249, 73)
+}
+
+.outsideCardWithNoBall {
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(233, 232, 232);
+  margin-bottom: 15px;
+  padding: 10px;
+  padding-left: 14px;
+  border-left: 3px solid rgb(196, 196, 196)
+}
+
+.name{
+  font-size: 10px;
+  font-weight: 600;
+  margin:0px;
+}
+.personIcon{
+  height: 100%;
+}
+
+.time{
+  font-size: 10px;
+  /* border: red 1px solid; */
+  display: flex; 
+  align-items: center;
+
+}
+
+.clock{
+  margin-right: 5px;
+}
+
+.arrow{
+  /* border: red 1px solid; */
+  margin:0;
+}
+
+
+
+

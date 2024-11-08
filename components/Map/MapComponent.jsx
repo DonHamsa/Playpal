@@ -35,7 +35,7 @@ const request = (center) => {
     fields: ["location", "adrFormatAddress", "addressComponents"],
     type: "park",
     location: { lat: center.lat, lng: center.lng },
-    radius: 2000,
+    radius: 2300,
     includedPrimaryTypes: ["park"],
   };
 };
@@ -62,8 +62,15 @@ const MapComponent = ({
   parks,
   setParks,
   hoverPark,
+  parkPolygonData,
+  listOfParks,
+  setListOfParks,
+  hoverParksCentralLocation,
+  whichCard,
+  selectedParksIndex,
+  randomMarkersPos,
+  centrePointsEachPark,
 }) => {
-  // console.log(userAddress)
   const mapRef = useRef(null);
   const radius = 2000;
   const [userHasDragged, setUserHasDragged] = useState(0);
@@ -75,6 +82,29 @@ const MapComponent = ({
   if (parks.length !== 0) {
     defaultMapZoom = 13;
   }
+  if (hoverParksCentralLocation) {
+    defaultMapZoom = 15;
+  }
+  if (whichCard){
+    defaultMapZoom=15 
+  }
+
+  useEffect(() => {
+    if (parkPolygonData) {
+      const length = parkPolygonData.length;
+      let allParkList = [];
+      for (let i = 0; i < length; i++) {
+        let individualPark = [];
+        let parkCoordinates = parkPolygonData[i]["geometry"]["coordinates"][0];
+        parkCoordinates.forEach((coord) => {
+          let parkPoint = { lat: coord[1], lng: coord[0] };
+          individualPark.push(parkPoint);
+        });
+        allParkList.push(individualPark);
+      }
+      setListOfParks(allParkList);
+    }
+  }, [parkPolygonData]);
 
   useEffect(() => {
     if (userAddress && mapRef) {
@@ -105,13 +135,11 @@ const MapComponent = ({
             place.geometry.location.lat(),
             place.geometry.location.lng(),
           ]);
-          // console.log(place)
-          // setParksLocation(place.name)
+
           parksLocation.push(place.name);
           count++;
         });
 
-        setParks(pushableParks);
         setParksLocation(parksLocation);
       });
     }
@@ -121,7 +149,7 @@ const MapComponent = ({
     setUserHasDragged(userHasDragged + 1);
   };
 
-  if (userAddress && mapRef.current) {
+  if (userAddress && mapRef.current && !hoverParksCentralLocation && !whichCard) {
     circlePath = [];
 
     outerBounds = changeOuterBounds(mapRef);
@@ -154,35 +182,25 @@ const MapComponent = ({
   </svg>
 `;
 
-  const createMarkers = useMemo(() => {
-    let list;
-    if (hoverPark.length === 0) {
-      list = parks;
-    } else {
-      list = [hoverPark];
-    }
-    return list.map((park) => {
-      return (
-        <Marker
-          position={{ lat: park[0], lng: park[1] }}
-          key={Math.random()}
-          icon={{
-            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
-              customPin
-            )}`, // Encode the SVG as a data URI
-            scaledSize: new window.google.maps.Size(20, 20), // Adjust the size if needed
-          }}
-        />
-      );
-    });
-  }, [parks, hoverPark]);
+  const userLocationMarker = useMemo(() => {
+    return (
+      <Marker
+        position={userAddress}
+        key={Math.random()}
+        icon={{
+          url: "/images/userLocation.png",
+          scaledSize: new window.google.maps.Size(35, 35), // Adjust the size if needed
+        }}
+      />
+    );
+  }, [userAddress]);
 
   return (
     <div className="mapBlock">
       <div className="mapBox">
         <GoogleMap
           mapContainerStyle={defaultMapContainerStyle}
-          center={userAddress || defaultMapCenter}
+          center={(whichCard && {lat:centrePointsEachPark[Number(selectedParksIndex)][1], lng: centrePointsEachPark[Number(selectedParksIndex)][0]}) || hoverParksCentralLocation || userAddress || defaultMapCenter}
           zoom={defaultMapZoom}
           options={defaultMapOptions}
           onLoad={(map) => {
@@ -192,6 +210,18 @@ const MapComponent = ({
           onDrag={handleDrag}
           onZoomChanged={handleDrag}
         >
+          {whichCard && selectedParksIndex !== false && (
+            <Marker
+              position={randomMarkersPos}
+              icon= {{
+                url:(whichCard==='1' ? "/images/red.png" : "/images/black.png"),
+                // fillColor: "#90EE90",
+                // fillOpacity:1,
+                scaledSize: new window.google.maps.Size(32, 35),
+              }}
+            />
+          )}
+          {userAddress && userLocationMarker}
           {circlePath && outerBounds && (
             <>
               <Polygon
@@ -206,7 +236,34 @@ const MapComponent = ({
               />
             </>
           )}
-          {parks.length !== 0 && createMarkers}
+          {listOfParks.length !== 0 &&
+            hoverPark.length === 0 &&
+            listOfParks.map((park, index) => {
+              return (
+                <Polygon
+                  key={index}
+                  path={park}
+                  options={{
+                    // fillColor: "rgba(147, 130, 116, 0.9)",
+                    strokeColor: "#000000",
+                    fillOpacity: 0,
+                    strokeWeight: 0.7,
+                  }}
+                />
+              );
+            })}
+          {hoverPark.length !== 0 && (
+            <Polygon
+              key={Math.random()}
+              path={hoverPark}
+              options={{
+                // fillColor: "rgba(147, 130, 116, 0.9)",
+                strokeColor: "#000000",
+                fillOpacity: 0,
+                strokeWeight: 0.7,
+              }}
+            />
+          )}
         </GoogleMap>
       </div>
     </div>

@@ -9,18 +9,25 @@ export default function LocationList({
   setHoverPark,
   setUserParkOption,
   hoverPark,
+  listOfParks,
+  setHoverParksCentralLocation,
+  centrePointsEachPark,
+  setSelectedParksIndex
 }) {
   const onMouseEnterHandler = () => {
-    setHoverPark(parksLocation[theKey]);
-    if (para) {
-      // para.current.classList.add('makeBlack')
-    }
+    setHoverPark(listOfParks[theKey]);
+    setHoverParksCentralLocation({lat:centrePointsEachPark[theKey][1],lng:centrePointsEachPark[theKey][0] })
+    
   };
   const onMouseLeaveHandler = () => {
     setHoverPark([]);
+    setHoverParksCentralLocation(false)
+
   };
   const handleClick = () => {
     setUserParkOption(true);
+    setSelectedParksIndex(theKey)
+    
   };
 
   const para = useRef("");

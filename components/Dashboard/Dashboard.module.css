@@ -1,0 +1,105 @@
+.gridBox{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  /* border: solid 1px red; */
+  /* margin: 0 15%; */
+  margin-left:15%;
+  margin-right: 15%
+}
+
+.outsideBox{
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  transition: all 300ms ease-in-out;
+  margin-bottom: 15px;
+  height: 300px;
+  overflow: hidden;
+
+}
+
+.leftBox{
+  /* border: red 1px solid; */
+  display: flex; 
+  flex-direction: column;
+}
+
+.outsideBoxNoScroll{
+  border: 0.5px solid black;
+  border-radius: 5px;
+  transition: all 300ms ease-in-out;
+  margin-bottom: 15px;
+  height: auto;
+}
+
+
+.outsideBox:hover{
+  overflow: scroll;
+  overflow-x: hidden;
+
+
+}
+
+.paddedBox{
+  padding: 10px;
+  /* border: 1px solid purple; */
+}
+
+.name{
+  font-weight: 600
+}
+
+.ballKey{
+  background: rgb(251, 251, 251);
+  font-size:9px;
+  border-radius: 3px;
+  height: 27px;
+  padding-left: 7px;
+}
+
+.ballKeyCentre{
+  display: flex;
+  align-items: center;
+  padding-left: 3px;
+  height: 100%;
+}
+
+.ball{
+  color:  rgb(73, 249, 73);
+  /* border: red 1px solid; */
+}
+
+.box{
+  /* border: red 1px solid; */
+  vertical-align: middle;
+  margin-right: 3px;
+  color:  rgb(73, 249, 73);
+}
+
+
+.rightSideBoxPadded{
+  display: grid;
+  grid-template-rows: 500px 1fr;
+  /* border: red 1px solid; */
+  width: 90%;
+  padding-left: 15px;
+}
+
+
+.buttonsBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /* border: red 1px solid; */
+  height: max-content;
+  margin:0;
+  padding:0;
+}
+
+.mapBoxNHeading{
+  border: 0.5px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+

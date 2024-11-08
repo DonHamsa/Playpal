@@ -1,0 +1,23 @@
+.button{
+  background: rgba(255, 0, 0, 0.3);
+  width: 130px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  height: 55px;
+  border: none;
+}
+
+
+
+.buttonAThePark{
+  background: rgb(223, 5, 5);
+  width: 130px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  height: 55px;
+  border: none;
+}

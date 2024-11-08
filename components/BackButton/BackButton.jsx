@@ -7,11 +7,16 @@ export default function BackButton({
   setHoverPark,
   userParkOption,
   setUserSelectParkStatus,
-  userSelectParkStatus
+  userSelectParkStatus,
+  whichCard,
+  setWhichChard
 }) {
   const onClickHandler = () => {
+
+    if (whichCard){
+      setWhichChard(false)
+    }
     if (userSelectParkStatus && userParkOption) {
-      console.log('hello')
       setUserSelectParkStatus(false)
       return 
     }

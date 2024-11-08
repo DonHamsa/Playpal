@@ -1,0 +1,46 @@
+.buttonBox{
+  /* border: red 1px solid; */
+  text-align: center;
+  margin-top: 15px
+}
+
+.Button{
+  width: 400px;
+  height: 40px;
+  background-color: rgb(15, 15, 15);
+  border: none;
+  color: white;
+  font-weight: 600;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+}
+
+
+
+.Button::before {
+  width: 400px;
+  height: 130px;
+  position: absolute;
+  content: "";
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  left: -100%;
+  top: 0;
+  transition-duration: .3s;
+  mix-blend-mode: difference;
+}
+
+.Button:hover::before {
+  transition-duration: .3s;
+  transform: translate(100%,-50%);
+  border-radius: 0;
+}
+
+.Button:active {
+  transform: translate(5px,5px);
+  transition-duration: .3s;
+}
