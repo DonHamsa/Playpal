@@ -57,7 +57,7 @@ export default function Map() {
   const [userHasConfirmed, setUserHasConfirmed] = useState(false);
   const divRef = useRef(null);
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyChG76dCtgyEkKvEtYNt8eQDWjUaP42A0o",
+    googleMapsApiKey: 
     libraries: libraries,
   });
   useEffect(() => {
