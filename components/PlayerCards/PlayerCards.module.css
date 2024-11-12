@@ -11,7 +11,7 @@
   margin-bottom: 15px;
   padding: 10px;
   padding-left: 13px;
-  border-left: 3px solid rgb(73, 249, 73)
+  border-left: 3px solid #66BB6A
 }
 
 .outsideCardWithNoBall {
@@ -21,6 +21,29 @@
   padding: 10px;
   padding-left: 14px;
   border-left: 3px solid rgb(196, 196, 196)
+}
+
+.notAtPark{
+  display: grid;
+  grid-template-columns: 95% 1fr;
+  grid-template-rows: 20px 20px;
+}
+
+.plane{
+  margin-top: 14px;
+}
+
+.messBox:hover{
+  /* border: 1px solid; */
+  background: rgb(190, 190, 190)
+}
+
+.outsideCardLookingForPals {
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(233, 232, 232);
+  margin-bottom: 15px;
+  padding: 10px;
+  padding-left: 14px;
 }
 
 .name{

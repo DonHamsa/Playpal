@@ -24,6 +24,10 @@ h1 {
   padding: 0;
 }
 
+button{
+  cursor: pointer
+}
+
 .wrapper {
   /* border: red 1px solid; */
   height: 100vh;
@@ -379,7 +383,7 @@ stroke-dashoffset: -480;
 
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
  
 
 }
@@ -401,7 +405,7 @@ stroke-dashoffset: -480;
 }
 
 .joinButton{
-  border: 0.5px solid black;
+  border: 0.5px solid grey;
   opacity: 1;
   transition: border-color 0.7s ease; 
   margin:0;

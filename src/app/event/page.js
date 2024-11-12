@@ -56,10 +56,12 @@ export default function Map() {
   const [randomMarkersPos, setRandomMarkersPos] = useState(false);
   const [userHasConfirmed, setUserHasConfirmed] = useState(false);
   const divRef = useRef(null);
+  
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: 
+    googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
     libraries: libraries,
   });
+
   useEffect(() => {
     if (divRef.current) {
       divRef.current.classList.add("mapNList");
@@ -143,81 +145,85 @@ export default function Map() {
 
   return (
     <>
-    
-      <Header/>
-      
-        <div>
-          {scriptLoaded && parksLocation.length == 0 && (
-            <AddressBar
-              scriptLoaded={scriptLoaded}
-              loadError={loadError}
-              userLocationFunction={setUserManualAddress}
-            />
-          )}
+      <Header />
 
-          {scriptLoaded && (
-            <>
-              <div
-                ref={divRef}
-                className={
-                  userParkOption && !userSelectParkStatus ? "hide" : "show"
-                }
-              >
-                <MapComponent
-                  userAddress={userManualAddress}
-                  loadedState={scriptLoaded}
-                  setParksLocation={setParksLocation}
-                  parks={parks}
-                  hoverPark={hoverPark}
-                  parkPolygonData={parkPolygonData}
-                  listOfParks={listOfParks}
-                  setListOfParks={setListOfParks}
-                  hoverParksCentralLocation={hoverParksCentralLocation}
-                  selectedParksIndex={selectedParksIndex}
-                  centrePointsEachPark={centrePointsEachPark}
-                  whichCard={whichCard}
-                  randomMarkersPos={randomMarkersPos}
-                />
-                {parksLocation.length !== 0 && !userSelectParkStatus && (
-                  <LocationBox
-                    parks={parksLocation}
-                    allParks={parks}
-                    setHoverPark={setHoverPark}
-                    setUserParkOption={setUserParkOption}
-                    hoverPark={hoverPark}
-                    listOfParks={listOfParks}
-                    setHoverParksCentralLocation={setHoverParksCentralLocation}
-                    centrePointsEachPark={centrePointsEachPark}
-                    setSelectedParksIndex={setSelectedParksIndex}
-                  />
-                )}
-              </div>
-              {userParkOption && !userSelectParkStatus && (
-                <OptionPage
-                  setUserSelectParkStatus={setUserSelectParkStatus}
-                  setWhichChard={setWhichChard}
-                />
-              )}
-              {whichCard && <ConfirmButton setUserHasConfirmed={setUserHasConfirmed} userHasConfirmed={userHasConfirmed}/>}
+      <div>
+        {scriptLoaded && parksLocation.length == 0 && (
+          <AddressBar
+            scriptLoaded={scriptLoaded}
+            loadError={loadError}
+            userLocationFunction={setUserManualAddress}
+          />
+        )}
 
-              {parksLocation.length !== 0 && (
-                <BackButton
-                  setUserSelectParkStatus={setUserSelectParkStatus}
-                  setParksLocation={setParksLocation}
-                  divRef={divRef.current}
-                  setUserParkOption={setUserParkOption}
+        {scriptLoaded && (
+          <>
+            <div
+              ref={divRef}
+              className={
+                userParkOption && !userSelectParkStatus ? "hide" : "show"
+              }
+            >
+              <MapComponent
+                userAddress={userManualAddress}
+                loadedState={scriptLoaded}
+                setParksLocation={setParksLocation}
+                parks={parks}
+                hoverPark={hoverPark}
+                parkPolygonData={parkPolygonData}
+                listOfParks={listOfParks}
+                setListOfParks={setListOfParks}
+                hoverParksCentralLocation={hoverParksCentralLocation}
+                selectedParksIndex={selectedParksIndex}
+                centrePointsEachPark={centrePointsEachPark}
+                whichCard={whichCard}
+                randomMarkersPos={randomMarkersPos}
+              />
+              {parksLocation.length !== 0 && !userSelectParkStatus && (
+                <LocationBox
+                  parks={parksLocation}
+                  allParks={parks}
                   setHoverPark={setHoverPark}
-                  userParkOption={userParkOption}
-                  userSelectParkStatus={userSelectParkStatus}
-                  whichCard={whichCard}
-                  setWhichChard={setWhichChard}
+                  setUserParkOption={setUserParkOption}
+                  hoverPark={hoverPark}
+                  listOfParks={listOfParks}
+                  setHoverParksCentralLocation={setHoverParksCentralLocation}
+                  centrePointsEachPark={centrePointsEachPark}
+                  setSelectedParksIndex={setSelectedParksIndex}
                 />
               )}
-            </>
-          )}
-        </div>
-      
-      <FooterTwo/>
+            </div>
+            {userParkOption && !userSelectParkStatus && (
+              <OptionPage
+                setUserSelectParkStatus={setUserSelectParkStatus}
+                setWhichChard={setWhichChard}
+              />
+            )}
+            {whichCard && (
+              <ConfirmButton
+                setUserHasConfirmed={setUserHasConfirmed}
+                userHasConfirmed={userHasConfirmed}
+              />
+            )}
+
+            {parksLocation.length !== 0 && (
+              <BackButton
+                setUserSelectParkStatus={setUserSelectParkStatus}
+                setParksLocation={setParksLocation}
+                divRef={divRef.current}
+                setUserParkOption={setUserParkOption}
+                setHoverPark={setHoverPark}
+                userParkOption={userParkOption}
+                userSelectParkStatus={userSelectParkStatus}
+                whichCard={whichCard}
+                setWhichChard={setWhichChard}
+              />
+            )}
+          </>
+        )}
+      </div>
+
+      <FooterTwo />
     </>
   );
 }

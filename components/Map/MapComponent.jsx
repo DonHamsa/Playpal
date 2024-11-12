@@ -22,10 +22,10 @@ const defaultMapCenter = {
 };
 
 const defaultMapOptions = {
-  zoomControl: true,
-  tilt: 0,
+  // zoomControl: true,
+  // tilt: 0,
   // mapTypeControl: false,
-  gestureHandling: "auto",
+  // gestureHandling: "auto",
   mapId: "368672a61443988a",
   fullscreenControl: false,
 };
@@ -42,6 +42,7 @@ const request = (center) => {
 
 const changeOuterBounds = (mapRef) => {
   const bounds = mapRef.current.getBounds();
+  console.log(mapRef)
   if (!bounds) return;
 
   // Create coordinates that cover the entire visible map
@@ -105,6 +106,8 @@ const MapComponent = ({
       setListOfParks(allParkList);
     }
   }, [parkPolygonData]);
+
+
 
   useEffect(() => {
     if (userAddress && mapRef) {
@@ -174,13 +177,6 @@ const MapComponent = ({
     // console.log("Outer Bounds:", outerBounds);
     // console.log("Circle Path:", circlePath);
   }
-
-  const customPin = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="50" fill="rgba(71, 71, 71, 0.40)" />
-    <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="40" fill="white">•</text>
-  </svg>
-`;
 
   const userLocationMarker = useMemo(() => {
     return (

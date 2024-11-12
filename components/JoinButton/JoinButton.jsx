@@ -1,10 +1,13 @@
 import './JoinButton.css'
+import { useRouter } from "next/navigation";
 
 export default function JoinButton() {
+  const router= useRouter()
   return (
     <button
       className="bg-white text-center w-48 rounded-2xl h-14 relative text-black text-xl font-semibold group joinButton"
       type="button"
+      onClick={()=>router.push('./event')}
     >
       <div className="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
         <svg

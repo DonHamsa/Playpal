@@ -19,7 +19,7 @@ export default function Section() {
             <label className={styles.label}> </label>
             Password
             <input type="password" className={styles.input} />
-            <Link href="./event">
+            <Link href="./dashboard">
               <div className="center">
                 <button className="btn">
                   <svg

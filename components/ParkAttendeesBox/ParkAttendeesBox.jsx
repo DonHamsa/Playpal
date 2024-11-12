@@ -19,7 +19,7 @@ export default function ParkAttendeesBox({
 
 
   return (
-    <FadeInSection>
+    // <FadeInSection>
       <div className={styles.parkBox}>
         <p className={`${styles.textSameSize} ${styles.parkName}`}>
           <SlLocationPin className={styles.locationIcon} /> {parkName}
@@ -29,11 +29,11 @@ export default function ParkAttendeesBox({
           <MdKeyboardArrowRight className={styles.ratingIcon} size="11px" />
         </div>
 
-        <p className={styles.textSameSize}>
-          <GoPeople className={styles.peopleIcon} size="12px" />{" "}
+        <p className={`${styles.textSameSize} ${styles.lastLine}`}>
+          <GoPeople className={styles.peopleIcon}  />{" "}
           {numberOfAttendees} attendees
         </p>
       </div>
-    </FadeInSection>
+    // </FadeInSection>
   );
 }

@@ -6,7 +6,7 @@
 }
 
 .parkBox:hover{
-  border: rgba(64, 255, 64, 0.815) solid 1px
+  border: solid 1px #66BB6A;
 }
 
 .ratingNIcon {
@@ -35,10 +35,18 @@
 
 .peopleIcon {
   color: grey;
+  /* border: red 1px solid; */
+  vertical-align:bottom;
+  margin-bottom:1px;
 }
 
 .locationIcon {
   margin-right: 4px;
+}
+
+.lastLine{
+  /* border: 1px solid red; */
+  padding-bottom:0px;;
 }
 
 
