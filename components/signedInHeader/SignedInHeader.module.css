@@ -1,0 +1,79 @@
+.logoutText {
+  color: rgb(82, 80, 80);
+  font-size: 20px;
+  /* border: red 1px solid; */
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.logOut {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border: red 1px solid */
+}
+
+
+.profileIcon{
+  margin-right: 10px;
+  color: black;
+
+}
+
+
+
+.profileIcon:hover{
+  background: #f3f3f3;
+  border-radius: 7px;
+}
+
+
+.userName {
+  color: #66bb6a;
+  margin-left: 14px;
+}
+
+.welcomeText {
+  /* border: red 1px solid; */
+  font-size: 30px;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-left: 30px;
+}
+
+.outsideBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.textNIcon {
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-right: 50px;
+  width: 160px;
+  /* border: red 1px solid; */
+}
+
+.textNIcon:hover{
+  background:  #f3f3f3;
+  border-radius: 7px;
+}
+
+.textNIcon:hover {
+  cursor: pointer;
+}
+
+.outsideBox {
+  border-bottom: 0.5px solid grey;
+  margin-bottom: 6px;
+}

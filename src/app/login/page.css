@@ -1,0 +1,86 @@
+.bigBox {
+  /* border: red 1px solid; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  width: 99.8vw;
+  margin: 0;
+}
+
+.login {
+  max-width: 280px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  /* border: red 1px solid; */
+  height: max-content;
+  padding: 40px;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.hader {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+}
+.hader p {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 400;
+  color: #706b6b;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+.form input {
+  height: 40px;
+  outline: none;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+
+.form span a {
+  text-decoration: underline;
+}
+
+.memberLine {
+  /* border: red 1px solid; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #6B7280;
+
+}
+
+.button {
+  height: 40px;
+  padding: 10px;
+  border: none;
+  font-size: 15px;
+  border-radius: 2px;
+  background: rgb(109, 205, 109);
+  color: white;
+
+}
+
+.errorMessage {
+  color: red;
+  font-size: 13px;
+  margin: 0;
+}
+
+.loginSignUp {
+  margin: 0;
+  margin-left: 5px;
+}
+
+.loginSignUp:hover {
+  text-decoration: underline;
+}

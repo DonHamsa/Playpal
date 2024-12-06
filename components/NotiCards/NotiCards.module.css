@@ -1,0 +1,53 @@
+.outsideBox {
+  display: grid;
+  grid-template-columns: 90% 1fr;
+  /* border: red 1px solid; */
+  height: max-content;
+  /* border: red 1px solid; */
+  width: 285px;
+}
+
+.firstColumn {
+  /* border: red 1px solid; */
+}
+
+.timeIcon {
+  /* border: red 1px solid; */
+  margin-top: 3px;
+  padding: 0;
+}
+
+.time {
+  margin-left: 5px;
+}
+
+.timeNclock {
+  /* border: red 1px solid; */
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  margin-top:3px;
+}
+.binIcon {
+  color: grey;
+  padding: 6px;
+}
+
+.binIcon:hover {
+  border-radius: 6px;
+  background: rgb(243, 241, 241);
+}
+
+.parkName {
+  /* border: red 1px solid; */
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.secondColumn {
+  /* border: red 1px solid; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

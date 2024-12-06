@@ -12,14 +12,15 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import { useState, useRef, useEffect } from "react";
 import randomPointsOnPolygon from "random-points-on-polygon";
 import ConfirmButton from "../../../components/ConfirmButton/ConfirmButton";
-import Dashboard from "../../../components/Dashboard/Dashboard";
+import { createClient } from "../../../utils/supabase/client";
+import UserParkOptions from "../../../components/UserParkOptions/UserParkOptions";
 
 const libraries = ["places", "drawing", "geometry"];
 
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
 (
-  way["leisure"="park"]["name"~"(park|recreation|field)", i](around:2000, ${lat}, ${lng});
+  way["leisure"="park"]["name"~"(park|recreation|field)", i](around:1800, ${lat}, ${lng});
 );
 out geom;`;
   const encodedQuery = encodeURIComponent(request);
@@ -30,7 +31,7 @@ out geom;`;
 const overpassQueryForCentrePoint = (lat, lng) => {
   const request = `[out:json];
 (
-  way["leisure"="park"]["name"~"(park|recreation|field)", i](around:2000, ${lat}, ${lng});
+  way["leisure"="park"]["name"~"(park|recreation|field)", i](around:1800, ${lat}, ${lng});
 );
 out center;
 `;
@@ -55,22 +56,69 @@ export default function Map() {
   const [whichCard, setWhichChard] = useState(false);
   const [randomMarkersPos, setRandomMarkersPos] = useState(false);
   const [userHasConfirmed, setUserHasConfirmed] = useState(false);
+
+  const [userUUID, setUserUUID] = useState(null);
+  const [startTime, setStartTime] = useState("Now");
+  const [endTime, setEndTime] = useState("No End Time"); // Default value is "No End Time"
+  const [bringBall, setBringBall] = useState(false);
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [filteredEndTimes, setFilteredEndTimes] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("Playing with pals");
   const divRef = useRef(null);
-  
+
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
     libraries: libraries,
   });
 
+
+  useEffect(() => {
+    const gettingUserUUID = async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUserUUID(user["id"]);
+    };
+    gettingUserUUID();
+  }, []);
+
+  useEffect(() => {
+    if (userUUID) {
+      const userPostcode = async () => {
+        const supabase = createClient();
+        const { data, error } = await supabase
+          .from("profile")
+          .select("postcode")
+          .eq("id", userUUID);
+        if (data) {
+          let postCodeLatNLng = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+              data[0]["postcode"]
+            )}&key=${process.env.NEXT_PUBLIC_API_KEY}`
+          );
+          postCodeLatNLng = await postCodeLatNLng.json();
+          setUserManualAddress(
+            postCodeLatNLng["results"][0]["geometry"]["location"]
+          );
+        }
+      };
+
+      userPostcode();
+    }
+  }, [userUUID]);
+
+  useEffect(() => {
+    if (whichCard !== false) {
+      divRef.current.classList.remove("mapNList");
+    }
+  }, [whichCard]);
+
   useEffect(() => {
     if (divRef.current) {
       divRef.current.classList.add("mapNList");
-      if (!userParkOption && parksLocation.length === 0) {
-        divRef.current.classList.remove("mapNList");
-      }
     }
   }, [parksLocation, userParkOption]);
-  //  geoJsonData["features"][2]['geometry']['coordinates'][0],
 
   useEffect(() => {
     if (userManualAddress) {
@@ -120,7 +168,7 @@ export default function Map() {
           setParkPolygonData(geoJsonData);
           let namesOfParks = [];
           geoJsonData.forEach((park) => {
-            namesOfParks.push(park.properties.tags.name);
+            namesOfParks.push(park.properties.name);
           });
           setParks(namesOfParks);
           // Log the GeoJSON data
@@ -147,39 +195,43 @@ export default function Map() {
     <>
       <Header />
 
-      <div>
-        {scriptLoaded && parksLocation.length == 0 && (
+      <div className="eventMiddleBox">
+        {/* {scriptLoaded && parksLocation.length == 0 && (
           <AddressBar
             scriptLoaded={scriptLoaded}
             loadError={loadError}
             userLocationFunction={setUserManualAddress}
           />
-        )}
+        )} */}
 
         {scriptLoaded && (
           <>
             <div
               ref={divRef}
               className={
-                userParkOption && !userSelectParkStatus ? "hide" : "show"
+                userParkOption && !userSelectParkStatus
+                  ? "hide"
+                  : "show mapNList"
               }
             >
-              <MapComponent
-                userAddress={userManualAddress}
-                loadedState={scriptLoaded}
-                setParksLocation={setParksLocation}
-                parks={parks}
-                hoverPark={hoverPark}
-                parkPolygonData={parkPolygonData}
-                listOfParks={listOfParks}
-                setListOfParks={setListOfParks}
-                hoverParksCentralLocation={hoverParksCentralLocation}
-                selectedParksIndex={selectedParksIndex}
-                centrePointsEachPark={centrePointsEachPark}
-                whichCard={whichCard}
-                randomMarkersPos={randomMarkersPos}
-              />
-              {parksLocation.length !== 0 && !userSelectParkStatus && (
+              {userManualAddress && (
+                <MapComponent
+                  userAddress={userManualAddress}
+                  loadedState={scriptLoaded}
+                  setParksLocation={setParksLocation}
+                  parks={parks}
+                  hoverPark={hoverPark}
+                  parkPolygonData={parkPolygonData}
+                  listOfParks={listOfParks}
+                  setListOfParks={setListOfParks}
+                  hoverParksCentralLocation={hoverParksCentralLocation}
+                  selectedParksIndex={selectedParksIndex}
+                  centrePointsEachPark={centrePointsEachPark}
+                  whichCard={whichCard}
+                  randomMarkersPos={randomMarkersPos}
+                />
+              )}
+              {!userSelectParkStatus && userManualAddress && (
                 <LocationBox
                   parks={parksLocation}
                   allParks={parks}
@@ -194,19 +246,39 @@ export default function Map() {
               )}
             </div>
             {userParkOption && !userSelectParkStatus && (
-              <OptionPage
+              <UserParkOptions
                 setUserSelectParkStatus={setUserSelectParkStatus}
                 setWhichChard={setWhichChard}
+                startTime={startTime}
+                setStartTime={setStartTime}
+                endTime={endTime}
+                setEndTime={setEndTime}
+                bringBall={bringBall}
+                setBringBall={setBringBall}
+                timeSlots={timeSlots}
+                setTimeSlots={setTimeSlots}
+                filteredEndTimes={filteredEndTimes}
+                setFilteredEndTimes={setFilteredEndTimes}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
               />
             )}
             {whichCard && (
               <ConfirmButton
                 setUserHasConfirmed={setUserHasConfirmed}
                 userHasConfirmed={userHasConfirmed}
+                userUUID={userUUID}
+                randomMarkersPos={randomMarkersPos}
+                startTime={startTime}
+                endTime={endTime}
+                parks={parks}
+                selectedParksIndex={selectedParksIndex}
+                bringBall={bringBall}
+                selectedOption={selectedOption}
               />
             )}
 
-            {parksLocation.length !== 0 && (
+            {parks.length !== 0 && (
               <BackButton
                 setUserSelectParkStatus={setUserSelectParkStatus}
                 setParksLocation={setParksLocation}

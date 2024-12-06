@@ -15,10 +15,10 @@ export default function PlayerCard({ name, startTime, endTime, hasBall, atPark})
   }
 
   return (
-    <div className={atPark? (hasBall? styles.outsideCardWithBall : styles.outsideCardWithNoBall) : styles.outsideCardLookingForPals}>
+    <div className={atPark? (hasBall? styles.outsideCardWithBall : styles.outsideCardWithNoBall) : styles.outsideCardWithNoBall}>
       <div className={styles.playerCard}>
         <GoPerson className={styles.personIcon} />
-        <div className={!atPark && styles.notAtPark}>
+        <div className={!atPark ? styles.notAtPark: ''}>
           <p className={styles.name}>{name}</p>
           {!atPark && <MessageSquare  className={styles.plane} size='14px'/>}
           <p className={styles.time}>

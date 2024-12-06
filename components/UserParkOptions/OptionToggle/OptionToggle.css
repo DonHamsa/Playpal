@@ -1,0 +1,41 @@
+.option-toggle {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+  position: relative;
+  width: fit-content;
+}
+
+.option-toggle__background {
+  position: absolute;
+  height: calc(100% - 8px);
+  width: calc(50% - 4px);
+  background-color: black;
+  border-radius: 6px;
+  transition: transform 0.2s ease-out;
+}
+
+.option-toggle__button {
+  position: relative;
+  z-index: 1;
+  padding: 9px 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+  transition: color 0.2s;
+}
+
+
+
+.option-toggle__button--selected {
+  color: white;
+}
+
+.option-toggle--second-selected .option-toggle__background {
+  transform: translateX(100%);
+}
+

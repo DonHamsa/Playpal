@@ -1,0 +1,67 @@
+.totalPageBox{
+  height:100%;
+  width: 100%;
+  position: absolute;
+  /* border: red 1px solid; */
+  display:flex;
+  justify-content: center;  
+  backdrop-filter: blur(7px);
+  z-index: 10;
+}
+
+
+.bigBox {
+  height: max-content;
+  width: 400px;
+  padding: 30px;
+  border: 0.5px solid rgb(206, 204, 204);
+  border-radius: 7px;
+  background: white;
+  margin-top: 110px;
+}
+
+.label {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 550;
+  /* border: red 1px solid; */
+}
+
+.input {
+  margin-top: 5px;
+  width: 95%;
+  height: 20px;
+  border-radius: 4px;
+  border: rgb(195, 195, 195) 0.5px solid;
+  padding: 8px;
+}
+
+.profileText {
+  border-bottom: 0.3px solid rgb(192, 192, 192);
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.postcodeMsg{
+  color: red;
+  font-size: 12px;
+  font-weight: 300;
+  margin-top: -9px;
+}
+
+.button {
+  margin-top: 10px;
+  width: 100%;
+  color: white;
+  background: black;
+  height: 37px;
+  border-radius: 5px;
+  border: none;
+}
+
+.email {
+  background: rgb(240, 240, 240);
+}

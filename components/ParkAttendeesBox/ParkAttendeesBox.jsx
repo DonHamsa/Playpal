@@ -1,3 +1,5 @@
+'use client'
+
 import { SlLocationPin } from "react-icons/sl";
 import { GoPeople } from "react-icons/go";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -11,29 +13,25 @@ const robotoMono = Roboto_Mono({
 
 export default function ParkAttendeesBox({
   parkName,
-  ratingNumber,
-  numberOfAttendees,
-  FadeInSection
+  ratingNumber = "N/A",
+  numberOfAttendees="N/A",
+  FadeInSection,
+  setClickedPark,
+  theKey
 }) {
-
-
-
   return (
-    // <FadeInSection>
-      <div className={styles.parkBox}>
-        <p className={`${styles.textSameSize} ${styles.parkName}`}>
-          <SlLocationPin className={styles.locationIcon} /> {parkName}
-        </p>
-        <div className={styles.ratingNIcon}>
-          <p className={robotoMono.className}> Rating: {ratingNumber} </p>
-          <MdKeyboardArrowRight className={styles.ratingIcon} size="11px" />
-        </div>
-
-        <p className={`${styles.textSameSize} ${styles.lastLine}`}>
-          <GoPeople className={styles.peopleIcon}  />{" "}
-          {numberOfAttendees} attendees
-        </p>
+    <div className={styles.parkBox} onClick={()=>setClickedPark(theKey)}>
+      <p className={`${styles.textSameSize} ${styles.parkName}`}>
+        <SlLocationPin className={styles.locationIcon} /> {parkName}
+      </p>
+      <div className={styles.ratingNIcon}>
+        <p className={styles.ratingsText}> Rating: {ratingNumber} </p>
+        <MdKeyboardArrowRight className={styles.ratingIcon} size="11px" />
       </div>
-    // </FadeInSection>
+
+      <p className={`${styles.textSameSize} ${styles.lastLine}`}>
+        <GoPeople className={styles.peopleIcon} /> {numberOfAttendees} players
+      </p>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 .buttonBox{
   /* border: red 1px solid; */
   text-align: center;
-  margin-top: 15px
 }
 
 .Button{
@@ -17,6 +16,7 @@
   position: relative;
   overflow: hidden;
   transition-duration: .3s;
+  bottom:35px;
 }
 
 

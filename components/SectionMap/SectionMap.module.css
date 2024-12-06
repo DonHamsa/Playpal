@@ -1,23 +1,23 @@
 .box {
   background: #938274;
-  height: 100%;
+  height: max-content;
   border-radius: 15px;
-  padding-top: 13px;
-  /* border: red 1px solid; */
-  width: 80%;
+  padding: 15px;
+  width: 77%;
+  box-shadow: 7px 7px 4px;
 }
 
 .outsideBox {
-  /* border: red 1px solid; */
   padding: 40px;
+  padding-left: 120px;
   padding-top: 50px;
+  display: flex;
+  align-items: center;
 }
 
 .textBox {
   background: #aff4c6;
-  margin: 13px;
   border-radius: 10px;
-  margin-bottom:0;
   height: 90px;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@
 }
 
 .image {
-  margin-left: 16px;
   margin-top: 10px;
   border-radius: 10px;
+  width: 100%;
 }

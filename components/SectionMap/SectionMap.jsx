@@ -10,13 +10,11 @@ export default function SectionMap() {
             See Who is Playing, Join the Game—Never Alone with New Friends
           </h1>
         </div>
-        <Image
+        <img 
           src="/images/themap.jpg"
-          width="394"
-          height="250"
           className={styles.image}
           alt="image"
-        ></Image>
+        ></img>
       </div>
     </div>
   );

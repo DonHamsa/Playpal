@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <>
       <div className={styles.imageBlock}>
-        <Link href='./'>
+        <Link href='./dashboard'>
           <Image
             src="/images/logo.png"
             width="200"

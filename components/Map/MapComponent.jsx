@@ -14,12 +14,9 @@ const defaultMapContainerStyle = {
   width: "400px",
   height: "380px",
   borderRadius: "25px 25px 25px 25px",
+  margin:'0'
 };
 
-const defaultMapCenter = {
-  lat: 54.82615975451427,
-  lng: -4.389917248775504,
-};
 
 const defaultMapOptions = {
   // zoomControl: true,
@@ -35,14 +32,13 @@ const request = (center) => {
     fields: ["location", "adrFormatAddress", "addressComponents"],
     type: "park",
     location: { lat: center.lat, lng: center.lng },
-    radius: 2300,
+    radius: 2000,
     includedPrimaryTypes: ["park"],
   };
 };
 
 const changeOuterBounds = (mapRef) => {
   const bounds = mapRef.current.getBounds();
-  console.log(mapRef)
   if (!bounds) return;
 
   // Create coordinates that cover the entire visible map
@@ -210,7 +206,7 @@ const MapComponent = ({
             <Marker
               position={randomMarkersPos}
               icon= {{
-                url:(whichCard==='1' ? "/images/red.png" : "/images/black.png"),
+                url:(whichCard==='Playing with pals' ? "/images/red.png" : "/images/black.png"),
                 // fillColor: "#90EE90",
                 // fillOpacity:1,
                 scaledSize: new window.google.maps.Size(32, 35),

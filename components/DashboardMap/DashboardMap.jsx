@@ -2,34 +2,52 @@
 
 import { GoogleMap, Polygon, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState, useMemo } from "react";
+// import { createClient } from "../../utils/supabase/client";
+
 import "./DashboardMap.css";
 
 const defaultMapContainerStyle = {
   width: "470px",
   height: "380px",
   borderRadius: "25px 25px 25px 25px",
-  marginBottom: '20px'
+  marginBottom: "20px",
 };
 
 const radius = 2000;
 const defaultMapZoom = 13;
-
-const userAddress = { lat: 51.52131476800326, lng: -0.4368598884788708 };
 
 const defaultMapOptions = {
   mapId: "368672a61443988a",
   fullscreenControl: false,
   disableDefaultUI: false,
   draggable: false,
-  
 };
 
-const DashboardMap = () => {
+const DashboardMap = ({ formattedPostcode }) => {
   let circlePath;
   let outerBounds;
   const [haveMap, setHaveMap] = useState(false);
+
+
   const mapRef = useRef(false);
 
+  // useEffect(() => {
+  //   if (userPostcode) {
+  //     const response = async () => {
+  //       const data = await fetch(
+  //         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+  //           userPostcode
+  //         )}&key=${process.env.NEXT_PUBLIC_API_KEY}`
+  //       );
+  //       let convertedPostcode = await data.json();
+  //       setFormattedPostcode({
+  //         lat: convertedPostcode["results"][0]["geometry"]["location"]["lat"],
+  //         lng: convertedPostcode["results"][0]["geometry"]["location"]["lng"],
+  //       });
+  //     };
+  //     response();
+  //   }
+  // }, [userPostcode]);
   const changeOuterBounds = (mapRef) => {
     const bounds = mapRef.current.getBounds();
     const ne = bounds.getNorthEast();
@@ -51,10 +69,11 @@ const DashboardMap = () => {
       for (let i = 0; i < numPoints; i++) {
         const angle = (i / numPoints) * 2 * Math.PI;
         circlePath.push({
-          lat: userAddress.lat + (radius / 111320) * Math.cos(angle),
+          lat: formattedPostcode.lat + (radius / 111320) * Math.cos(angle),
           lng:
-            userAddress.lng +
-            (radius / (111320 * Math.cos(userAddress.lat * (Math.PI / 180)))) *
+            formattedPostcode.lng +
+            (radius /
+              (111320 * Math.cos(formattedPostcode.lat * (Math.PI / 180)))) *
               Math.sin(angle),
         });
       }
@@ -80,7 +99,6 @@ const DashboardMap = () => {
   const userMarker = () => {
     return (
       <Marker
-        position={userAddress}
         key={Math.random()}
         icon={{
           url: "/images/userLocation.png",
@@ -90,22 +108,24 @@ const DashboardMap = () => {
     );
   };
   return (
-    <GoogleMap
-      mapContainerStyle={defaultMapContainerStyle}
-      center={userAddress}
-      zoom={defaultMapZoom}
-      options={defaultMapOptions}
-      onLoad={(map) => {
-        mapRef.current = map;
-        setTimeout(() => {
-          setHaveMap(true);
-        }, 50);
-      }}
-    >
-      {haveMap &&
-        calculations()
-      }
-    </GoogleMap>
+    <>
+      {formattedPostcode && (
+        <GoogleMap
+          mapContainerStyle={defaultMapContainerStyle}
+          center={formattedPostcode}
+          zoom={defaultMapZoom}
+          options={defaultMapOptions}
+          onLoad={(map) => {
+            mapRef.current = map;
+            setTimeout(() => {
+              setHaveMap(true);
+            }, 50);
+          }}
+        >
+          {haveMap && calculations()}
+        </GoogleMap>
+      )}
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export default function BackButton({
   setParksLocation,
@@ -9,28 +10,26 @@ export default function BackButton({
   setUserSelectParkStatus,
   userSelectParkStatus,
   whichCard,
-  setWhichChard
+  setWhichChard,
 }) {
+  const router = useRouter();
   const onClickHandler = () => {
-
-    if (whichCard){
-      setWhichChard(false)
+    if (whichCard) {
+      setWhichChard(false);
     }
     if (userSelectParkStatus && userParkOption) {
-      setUserSelectParkStatus(false)
-      return 
+      setUserSelectParkStatus(false);
+      return;
     }
 
     if (userParkOption) {
       setUserParkOption(false);
-
     } else {
-      setParksLocation([]);
-      setHoverPark([]);
+      // setParksLocation([]);
+      // setHoverPark([]);
+      router.push('/dashboard')
     }
   };
-
-
 
   return (
     <div className="backButtonBlock">
