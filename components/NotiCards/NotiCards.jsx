@@ -14,7 +14,6 @@ export default function NotiCards({
   setActivePlayerData
 }) {
   const onClickHandler = async () => {
-    console.log(userUUID)
     const supabase = createClient();
     const { error } = await supabase
       .from("active_players")

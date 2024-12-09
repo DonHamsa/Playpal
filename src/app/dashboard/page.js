@@ -10,6 +10,7 @@ import osmtogeojson from "osmtogeojson";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import NotiCards from "../../../components/NotiCards/NotiCards";
 import { format } from "date-fns";
+import MarkerIcon from "../../../components/MarkerIcon/MarkerIcon";
 
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
@@ -17,6 +18,18 @@ const overpassQuery = (lat, lng) => {
   way["leisure"="park"]["name"~"(park|recreation|field)", i](around:1800, ${lat}, ${lng});
 );
 out geom;`;
+  const encodedQuery = encodeURIComponent(request);
+  const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodedQuery}`;
+  return overpassUrl;
+};
+
+const overpassQueryForCentrePoint = (lat, lng) => {
+  const request = `[out:json];
+(
+  way["leisure"="park"]["name"~"(park|recreation|field)", i](around:1800, ${lat}, ${lng});
+);
+out center;
+`;
   const encodedQuery = encodeURIComponent(request);
   const overpassUrl = `https://overpass-api.de/api/interpreter?data=${encodedQuery}`;
   return overpassUrl;
@@ -41,16 +54,84 @@ export default function DashboardPage() {
   const [playerPlanningParkName, setPlayerPlanningParkName] = useState(null);
   const [playerStartNEndTime, setPlayerStartNEndTime] = useState(null);
   const [notificationClicked, setNotificationClicked] = useState(false);
+  const [rerun, setRerun] = useState(0);
 
   const [listOfParkIdsNName, setListOfParkIdsNName] = useState(null);
   const [listOfParkIds, setListOfParkIds] = useState(null);
   const [listOfActivePlayers, setListOfActivePlayers] = useState(null);
   const [listOfParksAndRatings, setListOfParksAndRatings] = useState(null);
+  const [listOfCentrePoints, setListOfCentrePoints] = useState(null);
+  const [clickedParkCord, setClickedParkCord] = useState(null);
+  const supabase = createClient();
+
+  console.log(clickedParkCord);
+
+  useEffect(() => {
+    if (formattedPostcode) {
+      fetch(
+        overpassQueryForCentrePoint(
+          formattedPostcode.lat,
+          formattedPostcode.lng
+        )
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          let geoJsonData = osmtogeojson(data);
+          geoJsonData = geoJsonData.features;
+          let listOfCentrePoints = [];
+          geoJsonData.forEach((park) => {
+            let coord = park["geometry"]["coordinates"];
+            listOfCentrePoints.push(coord);
+          });
+          setListOfCentrePoints(listOfCentrePoints);
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
+    }
+  }, [formattedPostcode]);
+
+  useEffect(() => {
+    const channel = supabase
+      .channel("active_players_changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "active_players" },
+        (payload) => {
+          console.log(payload);
+          setRerun((previousValue) => previousValue + 1);
+        }
+      )
+      .subscribe();
+
+    const profileChannel = supabase
+      .channel("profile_table__changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "profile" },
+        (payload) => {
+          setRerun((previousValue) => previousValue + 1);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+      supabase.removeChannel(profileChannel);
+    };
+  }, [supabase]);
 
   const handleClick = () => {
     setNotificationClicked(!notificationClicked);
   };
-
 
   useEffect(() => {
     if (listOfParkIds) {
@@ -75,7 +156,7 @@ export default function DashboardPage() {
       };
       gettingCount();
     }
-  }, [listOfParkIds, playerAtParkOrPlanning]);
+  }, [listOfParkIds, playerAtParkOrPlanning, rerun]);
 
   useEffect(() => {
     if (listOfParkIds) {
@@ -93,7 +174,7 @@ export default function DashboardPage() {
       };
       gettingPlayerTableCards();
     }
-  }, [listOfParkIds]);
+  }, [listOfParkIds, rerun]);
 
   useEffect(() => {
     if (listOfParks.length !== 0) {
@@ -323,6 +404,8 @@ export default function DashboardPage() {
               )}
             </div>
           )}
+
+          <MarkerIcon />
           <Dashboard
             listOfActivePlayers={listOfActivePlayers}
             listOfParkIdsNName={listOfParkIdsNName}
@@ -336,6 +419,11 @@ export default function DashboardPage() {
             setPlayerAtTheParkOrPlanning={setPlayerAtTheParkOrPlanning}
             setActivePlayerData={setActivePlayerData}
             listOfParksAndRatings={listOfParksAndRatings}
+            listOfParkIds={listOfParkIds}
+            rerun={rerun}
+            listOfCentrePoints={listOfCentrePoints}
+            setClickedParkCord={setClickedParkCord}
+            clickedParkCord={clickedParkCord}
           />
           {!profileCreated && (
             <ProfileForm

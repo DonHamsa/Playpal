@@ -409,7 +409,7 @@ select:focus {
 .lookingIcon {
   position: absolute;
   right: 0;
-  top: 127px;
+  top: 300px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

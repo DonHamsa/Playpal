@@ -1,12 +1,10 @@
 "use client";
 
 import { MapComponent } from "../../../components/Map/MapComponent";
-import AddressBar from "../../../components/AddressBar/AddressBar";
 import Header from "@/../components/Header/Header";
 import FooterTwo from "../../../components/FooterTwo/FooterTwo";
 import LocationBox from "../../../components/LocationBox/LocationBox";
 import BackButton from "../../../components/BackButton/BackButton";
-import OptionPage from "../../../components/OptionPage/OptionPage";
 import osmtogeojson from "osmtogeojson";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { useState, useRef, useEffect } from "react";
@@ -14,6 +12,7 @@ import randomPointsOnPolygon from "random-points-on-polygon";
 import ConfirmButton from "../../../components/ConfirmButton/ConfirmButton";
 import { createClient } from "../../../utils/supabase/client";
 import UserParkOptions from "../../../components/UserParkOptions/UserParkOptions";
+import { useRouter } from "next/navigation";
 
 const libraries = ["places", "drawing", "geometry"];
 
@@ -41,6 +40,7 @@ out center;
 };
 
 export default function Map() {
+  const router = useRouter();
   const [parkPolygonData, setParkPolygonData] = useState(null);
   const [userManualAddress, setUserManualAddress] = useState(null);
   const [parksLocation, setParksLocation] = useState([]);
@@ -64,6 +64,7 @@ export default function Map() {
   const [timeSlots, setTimeSlots] = useState([]);
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
   const [selectedOption, setSelectedOption] = useState("Playing with pals");
+  const [showPage, setShowPage] = useState(false);
   const divRef = useRef(null);
 
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
@@ -71,6 +72,16 @@ export default function Map() {
     libraries: libraries,
   });
 
+  useEffect(() => {
+    const allowedReferer = "https:localhost:3000/dashboard";
+    const referer = document.referrer; // Access the Referer header
+
+    if (!referer || !referer.startsWith(allowedReferer)) {
+      router.push("/dashboard ");
+    } else {
+      setShowPage(true);
+    }
+  }, [router]);
 
   useEffect(() => {
     const gettingUserUUID = async () => {
@@ -193,10 +204,12 @@ export default function Map() {
 
   return (
     <>
-      <Header />
+      {showPage && (
+        <>
+          <Header />
 
-      <div className="eventMiddleBox">
-        {/* {scriptLoaded && parksLocation.length == 0 && (
+          <div className="eventMiddleBox">
+            {/* {scriptLoaded && parksLocation.length == 0 && (
           <AddressBar
             scriptLoaded={scriptLoaded}
             loadError={loadError}
@@ -204,98 +217,102 @@ export default function Map() {
           />
         )} */}
 
-        {scriptLoaded && (
-          <>
-            <div
-              ref={divRef}
-              className={
-                userParkOption && !userSelectParkStatus
-                  ? "hide"
-                  : "show mapNList"
-              }
-            >
-              {userManualAddress && (
-                <MapComponent
-                  userAddress={userManualAddress}
-                  loadedState={scriptLoaded}
-                  setParksLocation={setParksLocation}
-                  parks={parks}
-                  hoverPark={hoverPark}
-                  parkPolygonData={parkPolygonData}
-                  listOfParks={listOfParks}
-                  setListOfParks={setListOfParks}
-                  hoverParksCentralLocation={hoverParksCentralLocation}
-                  selectedParksIndex={selectedParksIndex}
-                  centrePointsEachPark={centrePointsEachPark}
-                  whichCard={whichCard}
-                  randomMarkersPos={randomMarkersPos}
-                />
-              )}
-              {!userSelectParkStatus && userManualAddress && (
-                <LocationBox
-                  parks={parksLocation}
-                  allParks={parks}
-                  setHoverPark={setHoverPark}
-                  setUserParkOption={setUserParkOption}
-                  hoverPark={hoverPark}
-                  listOfParks={listOfParks}
-                  setHoverParksCentralLocation={setHoverParksCentralLocation}
-                  centrePointsEachPark={centrePointsEachPark}
-                  setSelectedParksIndex={setSelectedParksIndex}
-                />
-              )}
-            </div>
-            {userParkOption && !userSelectParkStatus && (
-              <UserParkOptions
-                setUserSelectParkStatus={setUserSelectParkStatus}
-                setWhichChard={setWhichChard}
-                startTime={startTime}
-                setStartTime={setStartTime}
-                endTime={endTime}
-                setEndTime={setEndTime}
-                bringBall={bringBall}
-                setBringBall={setBringBall}
-                timeSlots={timeSlots}
-                setTimeSlots={setTimeSlots}
-                filteredEndTimes={filteredEndTimes}
-                setFilteredEndTimes={setFilteredEndTimes}
-                selectedOption={selectedOption}
-                setSelectedOption={setSelectedOption}
-              />
-            )}
-            {whichCard && (
-              <ConfirmButton
-                setUserHasConfirmed={setUserHasConfirmed}
-                userHasConfirmed={userHasConfirmed}
-                userUUID={userUUID}
-                randomMarkersPos={randomMarkersPos}
-                startTime={startTime}
-                endTime={endTime}
-                parks={parks}
-                selectedParksIndex={selectedParksIndex}
-                bringBall={bringBall}
-                selectedOption={selectedOption}
-              />
-            )}
+            {scriptLoaded && (
+              <>
+                <div
+                  ref={divRef}
+                  className={
+                    userParkOption && !userSelectParkStatus
+                      ? "hide"
+                      : "show mapNList"
+                  }
+                >
+                  {userManualAddress && (
+                    <MapComponent
+                      userAddress={userManualAddress}
+                      loadedState={scriptLoaded}
+                      setParksLocation={setParksLocation}
+                      parks={parks}
+                      hoverPark={hoverPark}
+                      parkPolygonData={parkPolygonData}
+                      listOfParks={listOfParks}
+                      setListOfParks={setListOfParks}
+                      hoverParksCentralLocation={hoverParksCentralLocation}
+                      selectedParksIndex={selectedParksIndex}
+                      centrePointsEachPark={centrePointsEachPark}
+                      whichCard={whichCard}
+                      randomMarkersPos={randomMarkersPos}
+                    />
+                  )}
+                  {!userSelectParkStatus && userManualAddress && (
+                    <LocationBox
+                      parks={parksLocation}
+                      allParks={parks}
+                      setHoverPark={setHoverPark}
+                      setUserParkOption={setUserParkOption}
+                      hoverPark={hoverPark}
+                      listOfParks={listOfParks}
+                      setHoverParksCentralLocation={
+                        setHoverParksCentralLocation
+                      }
+                      centrePointsEachPark={centrePointsEachPark}
+                      setSelectedParksIndex={setSelectedParksIndex}
+                    />
+                  )}
+                </div>
+                {userParkOption && !userSelectParkStatus && (
+                  <UserParkOptions
+                    setUserSelectParkStatus={setUserSelectParkStatus}
+                    setWhichChard={setWhichChard}
+                    startTime={startTime}
+                    setStartTime={setStartTime}
+                    endTime={endTime}
+                    setEndTime={setEndTime}
+                    bringBall={bringBall}
+                    setBringBall={setBringBall}
+                    timeSlots={timeSlots}
+                    setTimeSlots={setTimeSlots}
+                    filteredEndTimes={filteredEndTimes}
+                    setFilteredEndTimes={setFilteredEndTimes}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
+                  />
+                )}
+                {whichCard && (
+                  <ConfirmButton
+                    setUserHasConfirmed={setUserHasConfirmed}
+                    userHasConfirmed={userHasConfirmed}
+                    userUUID={userUUID}
+                    randomMarkersPos={randomMarkersPos}
+                    startTime={startTime}
+                    endTime={endTime}
+                    parks={parks}
+                    selectedParksIndex={selectedParksIndex}
+                    bringBall={bringBall}
+                    selectedOption={selectedOption}
+                  />
+                )}
 
-            {parks.length !== 0 && (
-              <BackButton
-                setUserSelectParkStatus={setUserSelectParkStatus}
-                setParksLocation={setParksLocation}
-                divRef={divRef.current}
-                setUserParkOption={setUserParkOption}
-                setHoverPark={setHoverPark}
-                userParkOption={userParkOption}
-                userSelectParkStatus={userSelectParkStatus}
-                whichCard={whichCard}
-                setWhichChard={setWhichChard}
-              />
+                {parks.length !== 0 && (
+                  <BackButton
+                    setUserSelectParkStatus={setUserSelectParkStatus}
+                    setParksLocation={setParksLocation}
+                    divRef={divRef.current}
+                    setUserParkOption={setUserParkOption}
+                    setHoverPark={setHoverPark}
+                    userParkOption={userParkOption}
+                    userSelectParkStatus={userSelectParkStatus}
+                    whichCard={whichCard}
+                    setWhichChard={setWhichChard}
+                  />
+                )}
+              </>
             )}
-          </>
-        )}
-      </div>
+          </div>
 
-      <FooterTwo />
+          <FooterTwo />
+        </>
+      )}
     </>
   );
 }

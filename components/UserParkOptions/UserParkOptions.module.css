@@ -8,7 +8,7 @@
   /* border: red 1px solid; */
   width: 35%;
   height: max-content;
-  padding: 45px;
+  padding: 50px;
   border: 0.1px solid rgb(210, 208, 208);
   border-radius: 5px;
   margin-bottom: 30px
@@ -22,7 +22,7 @@
 }
 
 .firstLineText {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 25px;
   text-align: center;
 }

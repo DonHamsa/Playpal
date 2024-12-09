@@ -1,0 +1,36 @@
+.box{
+  width: 220px;
+  padding: 10px;
+  border: 0.5px solid grey;
+  font-weight: 400;
+  font-family:Arial;
+  border-radius: 5px;
+  position: absolute;
+  right: 5px;
+  top: 130px;
+  background: white;
+}
+
+.heading{
+  width: 100%;
+  text-align: center;
+  font-weight:700;
+  font-size: 18px;
+}
+
+
+.blackCircle{
+  margin-right: 4px;
+  color: black;
+}
+
+.redCircle{
+  margin-right: 4px;
+  color: red
+}
+
+
+.BrownCircle{
+  margin-right: 4px;
+  color: rgba(141, 113, 90, 0.654)
+}

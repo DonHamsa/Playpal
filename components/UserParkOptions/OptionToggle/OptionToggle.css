@@ -1,17 +1,18 @@
 .option-toggle {
   display: flex;
-  background-color: #f3f4f6;
+  background-color: white;
   border-radius: 8px;
   padding: 4px;
   position: relative;
   width: fit-content;
+  /* border: black 1px solid; */
 }
 
 .option-toggle__background {
   position: absolute;
   height: calc(100% - 8px);
   width: calc(50% - 4px);
-  background-color: black;
+  border: black 1px solid;
   border-radius: 6px;
   transition: transform 0.2s ease-out;
 }
@@ -32,7 +33,7 @@
 
 
 .option-toggle__button--selected {
-  color: white;
+  color: black;
 }
 
 .option-toggle--second-selected .option-toggle__background {

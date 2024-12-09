@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, useMemo } from "react";
 // import { createClient } from "../../utils/supabase/client";
 
 import "./DashboardMap.css";
+import { CircleDashed } from "lucide-react";
 
 const defaultMapContainerStyle = {
   width: "470px",
@@ -23,11 +24,15 @@ const defaultMapOptions = {
   draggable: false,
 };
 
-const DashboardMap = ({ formattedPostcode }) => {
+const DashboardMap = ({
+  formattedPostcode,
+  listOfMarkersAndStatus,
+  clickedParkCord,
+}) => {
   let circlePath;
   let outerBounds;
   const [haveMap, setHaveMap] = useState(false);
-
+  const [mapPath, setMapPath]= useState(null)
 
   const mapRef = useRef(false);
 
@@ -62,6 +67,7 @@ const DashboardMap = ({ formattedPostcode }) => {
 
   const calculations = () => {
     if (mapRef.current) {
+      if (mapPath===null) {
       circlePath = [];
 
       outerBounds = changeOuterBounds(mapRef);
@@ -81,9 +87,13 @@ const DashboardMap = ({ formattedPostcode }) => {
       // Reverse the order of the circlePath if needed
       circlePath.reverse();
 
+      setMapPath([circlePath, outerBounds])
+    }
       return (
+        <>
+        {console.log(mapPath)}
         <Polygon
-          paths={[circlePath, outerBounds]}
+          paths={mapPath}
           options={{
             strokeColor: "#000000",
             strokeOpacity: 0.8,
@@ -92,28 +102,33 @@ const DashboardMap = ({ formattedPostcode }) => {
             fillOpacity: 0.9,
           }}
         />
+        </>
       );
     }
   };
 
-  const userMarker = () => {
-    return (
-      <Marker
-        key={Math.random()}
-        icon={{
-          url: "/images/userLocation.png",
-          scaledSize: new window.google.maps.Size(35, 35), // Adjust the size if needed
-        }}
-      />
-    );
-  };
+  // const userMarker = () => {
+  //   return (
+  //     <Marker
+  //       key={Math.random()}
+  //       icon={{
+  //         url: "/images/userLocation.png",
+  //         scaledSize: new window.google.maps.Size(35, 35), // Adjust the size if needed
+  //       }}
+  //     />
+  //   );
+  // };
   return (
     <>
       {formattedPostcode && (
         <GoogleMap
           mapContainerStyle={defaultMapContainerStyle}
-          center={formattedPostcode}
-          zoom={defaultMapZoom}
+          center={
+            clickedParkCord
+              ? { lat: clickedParkCord[1], lng: clickedParkCord[0] }
+              : formattedPostcode
+          }
+          zoom={clickedParkCord? 16 : defaultMapZoom}
           options={defaultMapOptions}
           onLoad={(map) => {
             mapRef.current = map;
@@ -123,6 +138,37 @@ const DashboardMap = ({ formattedPostcode }) => {
           }}
         >
           {haveMap && calculations()}
+          {formattedPostcode && (
+            <Marker
+              position={formattedPostcode}
+              icon={{
+                url: "/images/userLocation.png",
+                scaledSize: new window.google.maps.Size(32, 35),
+              }}
+            ></Marker>
+          )}
+          {listOfMarkersAndStatus &&
+            listOfMarkersAndStatus.map((player, index) => {
+              let markerIcon;
+              if (player["at_park"]) {
+                markerIcon = "/images/red.png";
+              } else {
+                markerIcon = "/images/black.png";
+              }
+              return (
+                <Marker
+                  position={{
+                    lat: player["lat_marker"],
+                    lng: player["lng_marker"],
+                  }}
+                  icon={{
+                    url: markerIcon,
+                    scaledSize: new window.google.maps.Size(32, 35),
+                  }}
+                  key={index}
+                ></Marker>
+              );
+            })}
         </GoogleMap>
       )}
     </>

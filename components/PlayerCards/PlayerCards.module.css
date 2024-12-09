@@ -1,10 +1,9 @@
-.playerCard{
+.playerCard {
   display: grid;
   grid-template-columns: 25px 1fr;
   /* background: yellow; */
   /* border: red 1px solid; */
 }
-
 
 .outsideCardWithBall {
   border-radius: 2px;
@@ -12,7 +11,7 @@
   margin-bottom: 15px;
   padding: 10px;
   padding-left: 13px;
-  border-left: 3px solid #66BB6A
+  border-left: 3px solid #66bb6a;
 }
 
 .outsideCardWithNoBall {
@@ -21,22 +20,36 @@
   margin-bottom: 15px;
   padding: 10px;
   padding-left: 14px;
-  border-left: 3px solid rgb(196, 196, 196)
+  border-left: 3px solid rgb(196, 196, 196);
 }
 
-.notAtPark{
+.nameTimeMessageBox {
   display: grid;
-  grid-template-columns: 95% 1fr;
+  grid-template-columns: 92% 1fr;
   grid-template-rows: 20px 20px;
 }
 
-.plane{
-  margin-top: 14px;
+.nameTimeMessageBoxButForUserCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 20px;
 }
 
-.messBox:hover{
+
+
+.messIcon{
+  margin-top:5px;
+  padding: 8px;
+}
+
+.messIcon:hover{
+  background: #f3f3f3;
+  border-radius: 6px;
+}
+
+.messBox:hover {
   /* border: 1px solid; */
-  background: rgb(190, 190, 190)
+  background: rgb(190, 190, 190);
 }
 
 .outsideCardLookingForPals {
@@ -47,32 +60,27 @@
   padding-left: 14px;
 }
 
-.name{
+.name {
   font-size: 10px;
   font-weight: 600;
-  margin:0px;
+  margin: 0px;
 }
-.personIcon{
+.personIcon {
   height: 100%;
 }
 
-.time{
+.time {
   font-size: 10px;
   /* border: red 1px solid; */
-  display: flex; 
+  display: flex;
   align-items: center;
-
 }
 
-.clock{
+.clock {
   margin-right: 5px;
 }
 
-.arrow{
+.arrow {
   /* border: red 1px solid; */
-  margin:0;
+  margin: 0;
 }
-
-
-
-

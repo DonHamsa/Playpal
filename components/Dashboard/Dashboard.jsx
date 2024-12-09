@@ -13,7 +13,8 @@ import { useEffect, useState } from "react";
 import PlayerCard from "../PlayerCards/PlayerCards";
 import { format } from "date-fns";
 import { createClient } from "../../utils/supabase/client";
-import { list } from "postcss";
+
+const libraries = ["places", "drawing", "geometry"];
 
 export default function Dashboard({
   formattedPostcode,
@@ -28,6 +29,11 @@ export default function Dashboard({
   listOfActivePlayers,
   listOfParkIdsNName,
   listOfParksAndRatings,
+  listOfParkIds,
+  rerun,
+  listOfCentrePoints,
+  setClickedParkCord,
+  clickedParkCord
 }) {
   // const FadeInSection = (props) => {
   //   const [isVisible, setVisible] = useState(false);
@@ -47,16 +53,36 @@ export default function Dashboard({
   //     </div>
   //   );
   // };
-  const libraries = ["places", "drawing", "geometry"];
-
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
     libraries: libraries,
   });
+  const supabase = createClient();
 
   const [clickedParkId, setClickedParkId] = useState(null);
   const [userCardUUID, setUserCardUUID] = useState(null);
   const [listOfNameAndUUIDS, setListOfNamesAndUUIDS] = useState(null);
+  const [listOfMarkersAndStatus, setListOfMarkersAndStatus] = useState(null);
+
+
+  useEffect(() => {
+    if (listOfParkIds) {
+      const gettingPlayerMarkers = async () => {
+        const { data, error } = await supabase
+          .from("active_players")
+          .select("lat_marker, lng_marker, at_park")
+          .in("park_id", listOfParkIds);
+        if (data) {
+          setListOfMarkersAndStatus(data);
+        }
+        if (error) {
+          console.log(error);
+        }
+      };
+
+      gettingPlayerMarkers();
+    }
+  }, [listOfParkIds, rerun]);
 
   // useEffect(() => {
   //   if (userCardUUID) {
@@ -133,11 +159,14 @@ export default function Dashboard({
 
                 return (
                   <ParkAttendeesBox
+                    identifier={index}
                     numberOfAttendees={numberOfAttendees}
                     parkName={park}
                     key={index}
                     theKey={index}
                     setClickedPark={setClickedPark}
+                    listOfCentrePoints={listOfCentrePoints}
+                    setClickedParkCord={setClickedParkCord}
                   />
                 );
               })}
@@ -145,11 +174,11 @@ export default function Dashboard({
         </div>
         {clickedPark !== null && (
           <div className={styles.outsideBoxNoScroll}>
-            <div className={styles.paddedBox}>
+            <div className={`${styles.paddedBox} ${styles.secondPaddedBox}`}>
               <p className={styles.name}>{listOfParks[clickedPark]}</p>
               <LineDivider text="Playing with Pals" />
               {clickedParkId !== null &&
-                listOfActivePlayers.map((player) => {
+                listOfActivePlayers.map((player, index) => {
                   if (player["park_id"] == clickedParkId) {
                     if (player["at_park"]) {
                       let userName;
@@ -175,14 +204,15 @@ export default function Dashboard({
                       } else {
                         endTime = format(new Date(player["end_time"]), "HH:mm");
                       }
-
                       return (
                         <PlayerCard
+                          key={index}
                           name={userName}
                           startTime={startTime}
                           endTime={endTime}
                           hasBall={player["has_ball"]}
                           atPark={player["at_park"]}
+                          me={userUUID===player['user_name'] ? true : false }
                         />
                       );
                     }
@@ -190,7 +220,7 @@ export default function Dashboard({
                 })}
               <LineDivider text="Looking for pals" />
               {clickedParkId !== null &&
-                listOfActivePlayers.map((player) => {
+                listOfActivePlayers.map((player, index) => {
                   if (player["park_id"] == clickedParkId) {
                     if (!player["at_park"]) {
                       let userName;
@@ -216,14 +246,15 @@ export default function Dashboard({
                       } else {
                         endTime = format(new Date(player["end_time"]), "HH:mm");
                       }
-
                       return (
                         <PlayerCard
+                          key={index}
                           name={userName}
                           startTime={startTime}
                           endTime={endTime}
                           hasBall={player["has_ball"]}
                           atPark={player["at_park"]}
+                          me={userUUID===player['user_name'] ? true : false }
                         />
                       );
                     }
@@ -233,7 +264,11 @@ export default function Dashboard({
                 <div className={styles.ballKeyCentre}>
                   <p>
                     <VscCircleLargeFilled className={styles.box} />
-                    Player bringing ball
+                    Ball
+                  </p>
+                   <p>
+                    <VscCircleLargeFilled className={styles.noBallbox} />
+                    No ball
                   </p>
                 </div>
               </div>
@@ -247,7 +282,7 @@ export default function Dashboard({
           <div className={styles.mapBoxNHeading}>
             <p className={styles.mapText}> Map</p>
             {scriptLoaded && (
-              <DashboardMap formattedPostcode={formattedPostcode} />
+              <DashboardMap formattedPostcode={formattedPostcode} listOfMarkersAndStatus={listOfMarkersAndStatus} listOfCentrePoints={listOfCentrePoints} clickedParkCord={clickedParkCord}/>
             )}
           </div>
           <div className={styles.buttonsBox}>

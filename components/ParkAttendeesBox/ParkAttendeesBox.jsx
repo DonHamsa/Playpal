@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { SlLocationPin } from "react-icons/sl";
 import { GoPeople } from "react-icons/go";
@@ -14,13 +14,23 @@ const robotoMono = Roboto_Mono({
 export default function ParkAttendeesBox({
   parkName,
   ratingNumber = "N/A",
-  numberOfAttendees="N/A",
+  numberOfAttendees = "N/A",
   FadeInSection,
   setClickedPark,
-  theKey
+  theKey,
+  identifier,
+  listOfCentrePoints,
+  setClickedParkCord,
 }) {
   return (
-    <div className={styles.parkBox} onClick={()=>setClickedPark(theKey)}>
+    <div
+      className={styles.parkBox}
+      onClick={() => {
+        setClickedPark(theKey);
+      }}
+      onMouseOver={()=>setClickedParkCord(listOfCentrePoints[identifier])}
+      onMouseLeave ={()=>setClickedParkCord(false)}
+    >
       <p className={`${styles.textSameSize} ${styles.parkName}`}>
         <SlLocationPin className={styles.locationIcon} /> {parkName}
       </p>

@@ -38,6 +38,7 @@
 
 .paddedBox {
   padding: 10px;
+  padding-bottom: 0;
   /* border: 1px solid purple; */
 }
 
@@ -51,14 +52,22 @@
   border-radius: 3px;
   height: 27px;
   padding-left: 7px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  /* border: red 1px solid; */
 }
 
 .ballKeyCentre {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   padding-left: 3px;
   height: 100%;
+}
+
+.noBallbox {
+  color: rgb(196, 196, 196);
+  vertical-align: middle;
+  margin-right: 3px;
 }
 
 .box {
@@ -99,4 +108,8 @@
 .mapText {
   font-weight: 600;
   font-size: 17px;
+}
+
+.cardsAndKeyBox {
+  border: red 1px solid;
 }
