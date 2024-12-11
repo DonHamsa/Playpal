@@ -70,6 +70,7 @@ export default function UserParkOptions({
 
   // Handle the start time change
   const handleStartTimeChange = (e) => {
+    console.log(e.target.value);
     setStartTime(e.target.value);
     setEndTime("No End Time"); // Reset end time whenever start time changes
   };

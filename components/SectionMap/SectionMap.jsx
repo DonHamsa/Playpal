@@ -1,5 +1,4 @@
 import styles from "./SectionMap.module.css";
-import Image from "next/image";
 
 export default function SectionMap() {
   return (
@@ -13,7 +12,7 @@ export default function SectionMap() {
         <img 
           src="/images/themap.jpg"
           className={styles.image}
-          alt="image"
+          alt="basic Map Image"
         ></img>
       </div>
     </div>

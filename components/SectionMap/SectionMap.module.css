@@ -3,8 +3,9 @@
   height: max-content;
   border-radius: 15px;
   padding: 16px;
-  width: 77%;
+  width: 70%;
   box-shadow: 10px 10px 4px;
+  /* border: red 1px solid; */
 }
 
 .outsideBox {

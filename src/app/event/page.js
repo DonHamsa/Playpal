@@ -64,24 +64,26 @@ export default function Map() {
   const [timeSlots, setTimeSlots] = useState([]);
   const [filteredEndTimes, setFilteredEndTimes] = useState([]);
   const [selectedOption, setSelectedOption] = useState("Playing with pals");
-  const [showPage, setShowPage] = useState(false);
+  const [showPage, setShowPage] = useState(true);
   const divRef = useRef(null);
+
 
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
     libraries: libraries,
   });
 
-  useEffect(() => {
-    const allowedReferer = "https:localhost:3000/dashboard";
-    const referer = document.referrer; // Access the Referer header
+  // useEffect(() => {
+  //   const referrer = router.query.referrer;
+  
+  //   if (!referrer || referrer !== 'theKey') {
+  //     router.push('/dashboard'); // Redirect to homepage
+  //   } else {
+  //     setShowPage(true); // Show the restricted page
+  //   }
+  // }, [router]);
 
-    if (!referer || !referer.startsWith(allowedReferer)) {
-      router.push("/dashboard ");
-    } else {
-      setShowPage(true);
-    }
-  }, [router]);
+
 
   useEffect(() => {
     const gettingUserUUID = async () => {

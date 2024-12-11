@@ -62,9 +62,8 @@ export default function DashboardPage() {
   const [listOfParksAndRatings, setListOfParksAndRatings] = useState(null);
   const [listOfCentrePoints, setListOfCentrePoints] = useState(null);
   const [clickedParkCord, setClickedParkCord] = useState(null);
-  const supabase = createClient();
 
-  console.log(clickedParkCord);
+  const supabase = createClient();
 
   useEffect(() => {
     if (formattedPostcode) {
@@ -106,7 +105,7 @@ export default function DashboardPage() {
         "postgres_changes",
         { event: "*", schema: "public", table: "active_players" },
         (payload) => {
-          console.log(payload);
+          // console.log(payload);
           setRerun((previousValue) => previousValue + 1);
         }
       )

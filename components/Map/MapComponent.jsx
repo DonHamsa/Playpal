@@ -1,28 +1,16 @@
-/*
-Since the map was loaded on client side, 
-we need to make this component client rendered as well else error occurs
-// */
 "use client";
 import "./MapComponent.css";
-
-//Map component Component from library
 import { GoogleMap, Polygon, Marker } from "@react-google-maps/api";
 import { useEffect, useRef, useState, useMemo } from "react";
 
-//Map's styling
 const defaultMapContainerStyle = {
   width: "400px",
   height: "380px",
   borderRadius: "25px 25px 25px 25px",
-  margin:'0'
+  margin: "0",
 };
 
-
 const defaultMapOptions = {
-  // zoomControl: true,
-  // tilt: 0,
-  // mapTypeControl: false,
-  // gestureHandling: "auto",
   mapId: "368672a61443988a",
   fullscreenControl: false,
 };
@@ -82,8 +70,8 @@ const MapComponent = ({
   if (hoverParksCentralLocation) {
     defaultMapZoom = 15;
   }
-  if (whichCard){
-    defaultMapZoom=15 
+  if (whichCard) {
+    defaultMapZoom = 15;
   }
 
   useEffect(() => {
@@ -103,52 +91,16 @@ const MapComponent = ({
     }
   }, [parkPolygonData]);
 
-
-
-  useEffect(() => {
-    if (userAddress && mapRef) {
-      // console.log('hello')
-      const places = new window.google.maps.places.PlacesService(
-        mapRef.current
-      );
-
-      let pushableParks = [];
-      let parksLocation = [];
-      places.nearbySearch(request(userAddress), (response) => {
-        // console.log(response);
-        let count = 0;
-        response.forEach((place) => {
-          if (count === 3) {
-            return;
-          }
-
-          let types = place.types;
-          const BadPlace = types.find(
-            (type) => type === "bar" || type === "restaurant"
-          );
-          if (BadPlace) {
-            return;
-          }
-
-          pushableParks.push([
-            place.geometry.location.lat(),
-            place.geometry.location.lng(),
-          ]);
-
-          parksLocation.push(place.name);
-          count++;
-        });
-
-        setParksLocation(parksLocation);
-      });
-    }
-  }, [userAddress]);
-
   const handleDrag = () => {
     setUserHasDragged(userHasDragged + 1);
   };
 
-  if (userAddress && mapRef.current && !hoverParksCentralLocation && !whichCard) {
+  if (
+    userAddress &&
+    mapRef.current &&
+    !hoverParksCentralLocation &&
+    !whichCard
+  ) {
     circlePath = [];
 
     outerBounds = changeOuterBounds(mapRef);
@@ -192,7 +144,15 @@ const MapComponent = ({
       <div className="mapBox">
         <GoogleMap
           mapContainerStyle={defaultMapContainerStyle}
-          center={(whichCard && {lat:centrePointsEachPark[Number(selectedParksIndex)][1], lng: centrePointsEachPark[Number(selectedParksIndex)][0]}) || hoverParksCentralLocation || userAddress || defaultMapCenter}
+          center={
+            (whichCard && {
+              lat: centrePointsEachPark[Number(selectedParksIndex)][1],
+              lng: centrePointsEachPark[Number(selectedParksIndex)][0],
+            }) ||
+            hoverParksCentralLocation ||
+            userAddress ||
+            defaultMapCenter
+          }
           zoom={defaultMapZoom}
           options={defaultMapOptions}
           onLoad={(map) => {
@@ -205,8 +165,11 @@ const MapComponent = ({
           {whichCard && selectedParksIndex !== false && (
             <Marker
               position={randomMarkersPos}
-              icon= {{
-                url:(whichCard==='Playing with pals' ? "/images/red.png" : "/images/black.png"),
+              icon={{
+                url:
+                  whichCard === "Playing with pals"
+                    ? "/images/red.png"
+                    : "/images/black.png",
                 // fillColor: "#90EE90",
                 // fillOpacity:1,
                 scaledSize: new window.google.maps.Size(32, 35),

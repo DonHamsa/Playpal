@@ -26,7 +26,7 @@ export default function signedInHeader({ profileName, setProfileCreated }) {
       )}
       <BigBox>
         <div className={styles.textNIcon} onClick={()=>signOutFunction()}>
-          <Image src="/images/logoutIcon.png" width="50" height="50" />
+          <Image src="/images/logoutIcon.png" width="50" height="50" alt="Log Out Icon"/>
           <p className={styles.logoutText}>Log Out</p>
         </div>
       </BigBox>

@@ -25,8 +25,8 @@ const ProfileForm = ({
 
   const handlePostcode = (event) => {
     const postcode = event.target.value.trim();
-    const validPostcode = postcodeValidator(postcode, "GB");
-    if (!validPostcode) {
+    const validatedPostcode = postcodeValidator(postcode, "GB");
+    if (!validatedPostcode) {
       event.target.setCustomValidity("Please enter a valid Postcode");
     } else {
       event.target.setCustomValidity("");

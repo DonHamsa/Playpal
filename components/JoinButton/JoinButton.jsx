@@ -9,7 +9,9 @@ export default function JoinButton({playerAtParkOrPlanning}) {
       disabled={playerAtParkOrPlanning}
       className="joinButton"
       type="button"
-      onClick={() => router.push("./event")}
+      onClick={() => {router.push(
+      '/event'
+      )}}
     >
       <div className="joinButtonBox">
         <TiArrowLeft className="joinIcon" size='40' />
