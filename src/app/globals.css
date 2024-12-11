@@ -107,19 +107,6 @@ select:focus {
   border: none;
 }
 
-/* button{
-    background: #938274;
-    border: none;
-    margin: 0;
-    border-bottom-right-radius: 11px;
-    height: 101%;
-    width: 40px;
-    font-size:20px;
-    /* border: red 1px solid; */
-/* } */
-*/ button:hover {
-  background: #aff4c6;
-}
 
 .emptyBox:hover {
   background: #aff4c6;
@@ -239,7 +226,6 @@ select:focus {
 }
 
 .autocomplete-items .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -271,10 +257,6 @@ select:focus {
   width: max-content;
 }
 
-.flex.flex-col.w-full {
-  /* border: red 1px; */
-}
-
 .mapNList {
   /* border: red 1px solid; */
   display: grid;
@@ -284,7 +266,7 @@ select:focus {
 
 .backButtonBlock {
   position: relative;
-    /* bottom: 0px; */
+  /* bottom: 0px; */
   /* border: red 1px solid; */
   padding-left: 9%;
 }
@@ -301,7 +283,7 @@ select:focus {
 .show {
   display: grid;
   /* border: red 1px solid; */
-  height: max-content
+  height: max-content;
 }
 
 .hide {

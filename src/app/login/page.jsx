@@ -4,27 +4,26 @@ import { signup } from "./actions";
 import "./page.css";
 import SignIn from "./SignIn";
 import { useState, useEffect } from "react";
-import { useSearchParams , useRouter} from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Header from "../../../components/Header/Header";
+import { Suspense } from "react";
 
 const Form = () => {
-  const router= useRouter()
+  const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("message");
 
   const [wantsSigningUp, setWantsSigningUp] = useState(false);
 
   useEffect(() => {
-    if (search)
-    {
-      router.replace('./login');
+    if (search) {
+      router.replace("./login");
     }
-  
   }, [wantsSigningUp]);
 
   return (
     <>
-    <Header/>
+      <Header />
       {!wantsSigningUp && (
         <SignIn setWantsSigningUp={setWantsSigningUp} errorMessage={search} />
       )}
@@ -37,7 +36,12 @@ const Form = () => {
               <p>Sing up now to become a member.</p>
             </div>
             <form action="#" className="form">
-              <input type="text" placeholder="Enter Name" name="name"  required />
+              <input
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                required
+              />
               <input
                 type="email"
                 name="email"
@@ -53,10 +57,15 @@ const Form = () => {
                 required
               />
               {search && <p className="errorMessage">{search}</p>}
-              <button type="submit" formAction={signup} defaultValue="Signup" className="button">
+              <button
+                type="submit"
+                formAction={signup}
+                defaultValue="Signup"
+                className="button"
+              >
                 Sign Up
               </button>
-              <span className='memberLine'>
+              <span className="memberLine">
                 Already a member?
                 <p
                   className="loginSignUp"
@@ -73,4 +82,12 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default function logIn() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Form />
+    </Suspense>
+  );
+}
+
+// export default Form;
