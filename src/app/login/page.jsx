@@ -21,8 +21,7 @@ const Form = () => {
     }
   }, [wantsSigningUp]);
 
-  const url= process.env.VERCEL_URL
-  console.log(url)
+
 
   return (
     <>
