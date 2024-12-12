@@ -11,7 +11,7 @@ export function middleware(request) {
   console.log(url)
   const referer = request.headers.get('referer');
   console.log(referer)
-  const allowedReferer = `${url}/dashboard`; // Replace with your allowed referer URL
+  const allowedReferer = `https:${url}/dashboard`; // Replace with your allowed referer URL
 
   if (referer && referer.startsWith(allowedReferer)) {
     return NextResponse.next(); // Allow the request
