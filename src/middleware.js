@@ -8,6 +8,7 @@ export const config = {
 
 export function middleware(request) {
   const url= process.env.VERCEL_URL
+  console.log(url)
   const referer = request.headers.get('referer');
   const allowedReferer = `${url}/dashboard`; // Replace with your allowed referer URL
 
