@@ -2,6 +2,7 @@ import { createClient } from '../../../../utils/supabase/server'
 import { redirect } from 'next/navigation'
 
 export async function GET(request) {
+  console.log(request)
   const { searchParams } = new URL(request.url)
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') // removed type casting
