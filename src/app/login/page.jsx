@@ -21,6 +21,8 @@ const Form = () => {
     }
   }, [wantsSigningUp]);
 
+ console.log(VERCEL_URL)
+
   return (
     <>
       <Header />
