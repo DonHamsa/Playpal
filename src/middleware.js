@@ -7,7 +7,7 @@ export const config = {
 };
 
 export function middleware(request) {
-  const url= process.env.VERCEL_URL
+  const url= process.env.VERCEL_PROJECT_PRODUCTION_UR
   console.log(url)
   const referer = request.headers.get('referer');
   console.log(referer)
