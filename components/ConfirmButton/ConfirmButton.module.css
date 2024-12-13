@@ -1,19 +1,18 @@
-.buttonBox {
+.buttonBox{
   /* border: red 1px solid; */
   text-align: center;
 }
 
-.Button {
+.Button{
   width: 400px;
   height: 40px;
-  background-color: rgb(15, 15, 15);
+  background-color:white;
   border: none;
-  color: white;
+  color: black;
+  border: 1px solid black;
   font-weight: 600;
   gap: 8px;
   cursor: pointer;
-  background-color: rgb(255, 255, 255);
-  position: relative;
-  overflow: hidden;
-  transition-duration: 0.3s;
 }
+
+
