@@ -11,7 +11,7 @@
 @media (max-width: 900px) {
     .mainBlock {
         grid-template-columns: none; 
-        grid-template-rows: 50% 50%;  
+        grid-template-rows: 45% 55%;  
   }
   }
   
