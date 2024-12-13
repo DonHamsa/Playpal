@@ -37,3 +37,13 @@
   border-radius: 10px;
   width: 100%;
 }
+
+
+@media (max-width: 768px) {
+  .outsideBox {
+    padding:0;
+    /* border: red 1px solid; */
+    justify-content: center;
+   
+}
+}

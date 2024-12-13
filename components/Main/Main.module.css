@@ -1,9 +1,18 @@
 .mainBlock{
     display: grid;
     grid-template-columns: 50% 50%;
-    /* border:red 1px solid; */
     height: 100%;
     padding: 1.5px;
     margin:0;
-    
 }
+
+
+
+@media (max-width: 900px) {
+    .mainBlock {
+        grid-template-columns: none; 
+        grid-template-rows: 50% 50%;  
+        border:red 1px solid;
+  }
+  }
+  

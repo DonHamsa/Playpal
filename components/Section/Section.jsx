@@ -13,11 +13,10 @@ export default function Section() {
       <article className={styles.form}>
         <form>
           <fieldset className={styles.fieldset}>
-            {/* <legend className={styles.logIn}>Log in or Sign Up</legend> */}
+            <legend className={styles.bigHeroText}>Connect, Play, <span className={styles.liveText}>Live</span></legend>
             <p className={styles.para}>
-              See people nearby playing football, connect with others who want
-              to join in, and make new friends while bringing the joy of playing
-              outside back to life
+            Discover nearby football games, join like-minded
+            players, and rediscover the joy of outdoor play.
             </p>
             <button className="btn-23" onClick={()=>router.push('./login')} type="button">
               <span className="text">Get Playing</span>

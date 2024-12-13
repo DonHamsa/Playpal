@@ -13,18 +13,24 @@
 }
 
 
-.logIn{
-    font-size: 25px;
-    font-family: Montserrat;
+.bigHeroText{
+    font-size: 60px;
+    font-family: Inter;
     font-weight: 600;
     /* border: red 1px solid */
 }
 
+.liveText{
+    color:rgb(34 197 94)
+}
+
+
 .para{
-    font-size: 23px;
-    font-family: Montserrat;
+    font-size: 25px;
+    font-family: Inter;
     font-weight: 300;
     margin-right: 25px;
+    color:rgb(75 85 99);
 }
 
 .label{
@@ -53,3 +59,19 @@
     border: 1px solid black;
 }
 
+
+@media (max-width: 768px) {
+    .bigHeroText {
+     font-size: 40px
+  }
+  .para {
+    margin:0;
+ }
+ .form{
+    padding:0;
+    padding-top:0;
+    margin:0;
+    border: red 1px solid;
+ }
+
+  }
