@@ -12,7 +12,7 @@
   position: absolute;
   height: calc(100% - 8px);
   width: calc(50% - 4px);
-  border: black 1px solid;
+  border: rgb(232, 230, 230) 1px solid;
   border-radius: 6px;
   transition: transform 0.2s ease-out;
 }
