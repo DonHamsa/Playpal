@@ -31,6 +31,7 @@
 }
 
 .binIcon:hover {
+  cursor: pointer;
   border-radius: 6px;
   background: rgb(243, 241, 241);
 }
