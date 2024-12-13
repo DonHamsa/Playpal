@@ -12,7 +12,6 @@
     .mainBlock {
         grid-template-columns: none; 
         grid-template-rows: 50% 50%;  
-        border:red 1px solid;
   }
   }
   
