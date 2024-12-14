@@ -5,14 +5,14 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import "./DashboardMap.css";
 
 const defaultMapContainerStyle = {
-  width: "470px",
-  height: "380px",
+  width: "390px",
+  height: "300px",
   borderRadius: "25px 25px 25px 25px",
   marginBottom: "20px",
 };
 
 const radius = 2000;
-const defaultMapZoom = 13;
+const defaultMapZoom = 12.8;
 
 const defaultMapOptions = {
   mapId: "368672a61443988a",
@@ -26,6 +26,7 @@ export default function DashboardMap({
   listOfMarkersAndStatus,
   clickedParkCord,
 }) {
+  console.log(clickedParkCord)
   let circlePath;
   let outerBounds;
   const [haveMap, setHaveMap] = useState(false);
@@ -35,6 +36,7 @@ export default function DashboardMap({
 
   const changeOuterBounds = (mapRef) => {
     const bounds = mapRef.current.getBounds();
+    console.log(bounds)
     const ne = bounds.getNorthEast();
     const sw = bounds.getSouthWest();
     return [

@@ -36,11 +36,11 @@ button:disabled {
   display: grid;
   grid-template-rows: 130px 1fr 60px;
   width: 100%;
-  border: red 1px solid;
+  /* border: red 1px solid; */
 }
 
 .eventMiddleBox {
-  border: red 1px solid;
+  /* border: red 1px solid; */
   display: grid;
   grid-template-rows: 1fr 45px;
   height: 100%;

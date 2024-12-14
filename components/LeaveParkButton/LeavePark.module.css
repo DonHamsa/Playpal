@@ -1,19 +1,5 @@
-.button{
-  background: rgba(255, 0, 0, 0.3);
-  width: 130px;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 6px;
-  height: 55px;
-  border: none;
-  cursor:default
-}
-
-
-
-.buttonAThePark{
-  background: rgb(255, 15, 15); 
+.buttonAThePark {
+  background: rgb(255, 15, 15);
   width: 130px;
   color: white;
   font-size: 13px;
@@ -23,6 +9,12 @@
   border: none;
 }
 
-.buttonAThePark:hover{
-  transform: scale(1.001)
+.buttonAThePark:hover {
+  transform: scale(1.001);
+}
+
+@media (max-width: 900px) {
+  .buttonAThePark {
+    margin-right: 7px;
+  }
 }
