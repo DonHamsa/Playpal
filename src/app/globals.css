@@ -36,7 +36,7 @@ button:disabled {
   display: grid;
   grid-template-rows: 130px 1fr 60px;
   width: 99.8%;
-  border: red 1px solid;
+  /* border: red 1px solid; */
 }
 
 .eventMiddleBox {
