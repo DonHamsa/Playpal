@@ -10,6 +10,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 h1 {
@@ -34,11 +35,12 @@ button:disabled {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 130px 1fr 60px;
-  /* border: red 1px solid; */
+  width: 100%;
+  border: red 1px solid;
 }
 
 .eventMiddleBox {
-  /* border: red 1px solid; */
+  border: red 1px solid;
   display: grid;
   grid-template-rows: 1fr 45px;
   height: 100%;

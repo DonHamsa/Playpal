@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./SignedInHeader.module.css";
-import Image from "next/image";
 import BigBox from "./ClientDiv";
 import { CiUser } from "react-icons/ci";
 import { signOut } from "@/app/login/actions";
@@ -26,7 +25,7 @@ export default function signedInHeader({ profileName, setProfileCreated }) {
       )}
       <BigBox>
         <div className={styles.textNIcon} onClick={()=>signOutFunction()}>
-          <Image src="/images/logoutIcon.png" width="50" height="50" alt="Log Out Icon"/>
+          <img src="/images/logoutIcon.png"  alt="Log Out Icon" className={styles.image} />
           <p className={styles.logoutText}>Log Out</p>
         </div>
       </BigBox>

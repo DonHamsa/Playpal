@@ -17,20 +17,15 @@
   /* border: red 1px solid */
 }
 
-
-.profileIcon{
+.profileIcon {
   margin-right: 10px;
   color: black;
-
 }
 
-
-
-.profileIcon:hover{
+.profileIcon:hover {
   background: #f3f3f3;
   border-radius: 7px;
 }
-
 
 .userName {
   color: #66bb6a;
@@ -51,7 +46,11 @@
 .outsideBox {
   display: flex;
   justify-content: space-between;
+  border-bottom: 0.5px solid grey;
+  margin-bottom: 6px;
 }
+
+
 
 .textNIcon {
   height: 50%;
@@ -64,8 +63,8 @@
   /* border: red 1px solid; */
 }
 
-.textNIcon:hover{
-  background:  #f3f3f3;
+.textNIcon:hover {
+  background: #f3f3f3;
   border-radius: 7px;
 }
 
@@ -73,7 +72,38 @@
   cursor: pointer;
 }
 
-.outsideBox {
-  border-bottom: 0.5px solid grey;
-  margin-bottom: 6px;
+
+.image{
+  width: 50px;
+  height: 50px;
+}
+
+
+@media (max-width: 900px) {
+  .welcomeText {
+    font-size: 15px;
+  }
+
+  .outsideBox {
+    width: 100%;
+    border: red 1px solid;
+    position: relative;
+
+  }
+
+  .logoutText{
+    font-size:10px;
+  }
+  .image{
+    width: 30px;
+    height: 30px
+  }
+  .logOut{
+    width: max-content
+  }
+  .textNIcon{
+    border: red 1px solid;
+    width: 100px;
+  }
+
 }

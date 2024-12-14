@@ -1,11 +1,19 @@
 .gridBox {
   display: grid;
   grid-template-columns: 40% 60%;
-  /* border: solid 1px red; */
+  border: solid 1px red;
   /* margin: 0 15%; */
   margin-left: 15%;
   margin-right: 15%;
   /* filter: blur(10px) */
+}
+
+@media (max-width: 900px) {
+  .gridBox{
+    grid-template-columns: none;
+    margin-left:0;
+    margin-right:0;
+  }
 }
 
 .outsideBox {
