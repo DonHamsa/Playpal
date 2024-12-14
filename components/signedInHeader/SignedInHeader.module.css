@@ -20,6 +20,7 @@
 .profileIcon {
   margin-right: 10px;
   color: black;
+  size: 10px;
 }
 
 .profileIcon:hover {
@@ -111,6 +112,9 @@
   }
   .welcomeText{
     margin-left:5px;
+  }
+  .profileIcon{
+    size:6px
   }
 
 }

@@ -16,7 +16,7 @@ export default function signedInHeader({ profileName, setProfileCreated }) {
     <div className={styles.outsideBox}>
       {profileName.length !== 0 ? (
         <p className={styles.welcomeText}>
-        <CiUser className={styles.profileIcon} size='23' onClick={()=>{setProfileCreated(false)}} />
+        <CiUser className={styles.profileIcon}  onClick={()=>{setProfileCreated(false)}} />
           Hello,
           <span className={styles.userName}>{profileName}</span>
         </p>

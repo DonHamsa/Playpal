@@ -5,8 +5,8 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import "./DashboardMap.css";
 
 const defaultMapContainerStyle = {
-  width: "390px",
-  height: "300px",
+  width: "400px",
+  height: "340px",
   borderRadius: "25px 25px 25px 25px",
   marginBottom: "20px",
 };

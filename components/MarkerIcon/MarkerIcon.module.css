@@ -44,7 +44,8 @@
   .box{
     border: none;
     box-shadow: 1px 1px 10px rgb(207, 206, 206);
-    top: 125px;
+    top: 133px;
+    right:0px;
 
   }
 }
