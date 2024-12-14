@@ -1,16 +1,16 @@
-.joinButton{
+.joinButton {
   width: 140px;
-  border-radius:50px;
+  border-radius: 50px;
   background: linear-gradient(to right, #5cecb7, #10b981);
-  box-shadow:3px 3px 5px #5cecb7;
+  box-shadow: 3px 3px 5px #5cecb7;
   transition: transform 0.1s ease-in-out;
 }
 
-.joinButton:hover{
+.joinButton:hover {
   transform: scale(1.05);
 }
 
-.joinButtonBox{
+.joinButtonBox {
   display: flex;
   flex-direction: row;
   /* border:red 1px solid; */
@@ -18,16 +18,22 @@
   justify-content: center;
 }
 
-.joinText{
+.joinText {
   /* border:red 1px solid; */
-  margin:0;
-  font-size:20px;
+  margin: 0;
+  font-size: 20px;
   color: white;
   padding-top: 9px;
   font-weight: 600;
 }
 
-.joinIcon{
+.joinIcon {
   /* border:red 1px solid; */
   color: white;
+}
+
+@media (max-width: 900px) {
+  .joinButton {
+    margin-left: 2px;
+  }
 }

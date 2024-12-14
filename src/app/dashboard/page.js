@@ -404,8 +404,8 @@ export default function DashboardPage() {
             </div>
           )}
 
-          <MarkerIcon />
-      
+          {listOfParkIdsNName && listOfActivePlayers && <MarkerIcon />}
+
           <Dashboard
             listOfActivePlayers={listOfActivePlayers}
             listOfParkIdsNName={listOfParkIdsNName}
