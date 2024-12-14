@@ -38,3 +38,13 @@
   margin-right: 4px;
   color: rgba(141, 113, 90, 0.654)
 }
+
+
+@media (max-width: 900px) {
+  .box{
+    border: none;
+    box-shadow: 1px 1px 10px rgb(207, 206, 206);
+    top: 125px;
+
+  }
+}

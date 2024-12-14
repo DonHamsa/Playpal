@@ -12,7 +12,7 @@ const defaultMapContainerStyle = {
 };
 
 const radius = 2000;
-const defaultMapZoom = 12.8;
+const defaultMapZoom = 13;
 
 const defaultMapOptions = {
   mapId: "368672a61443988a",
@@ -104,7 +104,7 @@ export default function DashboardMap({
               ? { lat: clickedParkCord[1], lng: clickedParkCord[0] }
               : formattedPostcode
           }
-          zoom={clickedParkCord ? 16 : defaultMapZoom}
+          zoom={clickedParkCord ? 15.5 : defaultMapZoom}
           options={defaultMapOptions}
           onLoad={(map) => {
             mapRef.current = map;
