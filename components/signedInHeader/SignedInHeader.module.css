@@ -82,7 +82,7 @@
 
 @media (max-width: 900px) {
   .welcomeText {
-    font-size: 15px;
+    font-size: 23px;
   }
 
   .outsideBox {
@@ -93,7 +93,7 @@
   }
 
   .logoutText{
-    font-size:10px;
+    font-size:16px;
   }
   .image{
     width: 30px;

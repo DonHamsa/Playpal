@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import PlayerCard from "../PlayerCards/PlayerCards";
 import { format } from "date-fns";
 import { createClient } from "../../utils/supabase/client";
+import MarkerIcon from "../MarkerIconMobile/MarkerIconMobile";
 
 const libraries = ["places", "drawing", "geometry"];
 
@@ -234,7 +235,7 @@ export default function Dashboard({
           </div>
         )}
       </div>
-
+      <MarkerIcon/>
       <div className={styles.rightSideBox}>
         <div className={styles.rightSideBoxPadded}>
           <div className={styles.mapBoxNHeading}>

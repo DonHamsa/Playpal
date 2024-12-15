@@ -1,0 +1,48 @@
+
+.box{
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 0.5px solid grey;
+    font-weight: 400;
+    font-family: Arial;
+    border-radius: 5px;
+    position: relative;
+    background: white;
+    font-size: 10px;
+    font-family: Montserrat;
+  }
+  .textAndIcon {
+    width: max-content;
+  }
+
+  .heading {
+    width: max-content;
+    text-align: left;
+    font-weight: 600;
+    font-size: 16px;
+    /* border: red 1px solid; */
+  }
+
+  .blackCircle {
+    width: max-content;
+    margin-right: 4px;
+    color: black;
+  }
+
+  .redCircle {
+    width: max-content;
+    margin-right: 4px;
+    color: red;
+  }
+
+  .BrownCircle {
+    margin-right: 4px;
+    color: rgba(141, 113, 90, 0.654);
+  }
+}
