@@ -1,5 +1,7 @@
 
-
+.box{
+  display:none
+}
 
 @media (max-width: 900px) {
   .box {
