@@ -1,7 +1,5 @@
 
-.box{
-  display: none;
-}
+
 
 @media (max-width: 900px) {
   .box {
@@ -16,6 +14,8 @@
     background: white;
     font-size: 10px;
     font-family: Montserrat;
+    margin-bottom: 15px;
+
   }
   .textAndIcon {
     width: max-content;
