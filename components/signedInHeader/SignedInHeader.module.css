@@ -88,8 +88,10 @@
   .outsideBox {
     width: 100%;
     /* border: red 1px solid; */
-    position: relative;
-
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: white;
   }
 
   .logoutText{
