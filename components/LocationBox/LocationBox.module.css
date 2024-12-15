@@ -22,4 +22,14 @@
   width: 68%;
   border-radius: 8px;
   margin-bottom:40px;
+  /* border: red 1px solid; */
+}
+
+@media (max-width: 900px) {
+  .outsideBox{
+    display: flex;
+    /* border: red 1px solid; */
+    justify-content: center;
+    margin-bottom: 35px;
+  }
 }

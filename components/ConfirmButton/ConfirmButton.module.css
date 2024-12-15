@@ -13,6 +13,15 @@
   font-weight: 600;
   gap: 8px;
   cursor: pointer;
+  position: relative;
+  top: 20px;
+}
+
+@media (max-width: 900px) {
+  .Button {
+    top:0;
+    bottom: 100px
+  }
 }
 
 

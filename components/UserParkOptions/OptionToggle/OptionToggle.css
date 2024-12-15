@@ -32,6 +32,8 @@
 
 
 
+
+
 .option-toggle__button--selected {
   color: black;
 }
@@ -40,3 +42,11 @@
   transform: translateX(100%);
 }
 
+
+
+@media (max-width: 900px) {
+  .option-toggle__background {
+    border: rgb(157, 155, 155) 1px solid;
+
+}
+}

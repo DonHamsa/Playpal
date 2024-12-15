@@ -256,6 +256,13 @@ select:focus {
   align-items: center;
 }
 
+@media (max-width: 900px) {
+  .mapNList {
+    grid-template-columns: none;
+    grid-template-rows: 40% 1fr;
+  }
+}
+
 .backButtonBlock {
   position: relative;
   /* bottom: 0px; */
@@ -426,4 +433,10 @@ select:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+
+
+.mapAndConfirm{
+  display:none;
 }

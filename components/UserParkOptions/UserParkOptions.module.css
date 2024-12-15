@@ -59,3 +59,12 @@
   border-radius: 1px;
   color: black;
 }
+
+
+@media (max-width: 900px) {
+  .formBox{
+    width: 80%;
+    margin-bottom: 0px;
+    padding: 30px;
+  }
+}

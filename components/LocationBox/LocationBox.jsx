@@ -4,7 +4,7 @@ import LocationList from "./LocationList/LocationList";
 export default function LocationBox({ parks, allParks, setHoverPark, setUserParkOption, hoverPark, listOfParks,centrePointsEachPark, setHoverParksCentralLocation, setSelectedParksIndex}) {
   return (
     <>
-      <div>
+      <div className={styles.outsideBox}>
         <div className={styles.locationBox}>
           <h3 className={styles.heading}>Locations</h3>
           <h5 className={styles.instruction}>Double click on the park you are at/want to go to:</h5>
