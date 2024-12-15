@@ -388,17 +388,16 @@ select:focus {
 }
 
 .lookingIcon {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 350px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
+  z-index: 3000;
 }
 
 .notiIcon:hover {
-  background: #f3f3f3;
   cursor: pointer;
 
 }
@@ -411,7 +410,7 @@ select:focus {
   background: white;
   width: max-content;
   z-index: 3;
-
+  /* position: sticky; */
 }
 
 .notiBox {
