@@ -100,7 +100,8 @@
     height: 30px
   }
   .logOut{
-    width: max-content
+    width: max-content;
+    margin-right:6px;
   }
   .textNIcon{
     /* border: red 1px solid; */
@@ -114,7 +115,7 @@
     margin-left:5px;
   }
   .profileIcon{
-    size:6px
+    size:4px
   }
 
 }
