@@ -2,6 +2,9 @@
   width: 99%;
   display: flex;
   justify-content: center;
+  /* border: red 1px solid; */
+  align-items: center;
+
 }
 
 .formBox {
@@ -63,8 +66,9 @@
 
 @media (max-width: 900px) {
   .formBox{
-    width: 80%;
+    width: 90%;
     margin-bottom: 0px;
     padding: 30px;
+    /* border: red 1px solid; */
   }
 }
