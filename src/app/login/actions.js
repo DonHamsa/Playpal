@@ -7,7 +7,6 @@ import { createClient } from "../../../utils/supabase/server";
 
 export async function login(formData) {
   const supabase = await createClient();
-
   const data = {
     email: formData.get("email"),
     password: formData.get("password"),
@@ -15,12 +14,14 @@ export async function login(formData) {
 
   const { error } = await supabase.auth.signInWithPassword(data);
 
-  if (error) {
-    redirect("/login?message=Could not authenticate user");
-  }
 
+  if (error) {
+    // const randomString= crypto.randomBytes(Math.ceil(10 / 2)).toString('hex').slice(0, 10);
+    redirect(`/login?message=Could not authenticate user`);
+  }
   revalidatePath("/", "layout");
   redirect("/dashboard");
+
 }
 
 export async function signup(formData) {
@@ -39,7 +40,7 @@ export async function signup(formData) {
 
   if (error) {
     console.log(error);
-    redirect("/login?message=Error signing up");
+    redirect("/signup?message=Error signing up");
   }
 
 
