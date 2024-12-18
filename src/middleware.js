@@ -9,7 +9,7 @@ export const config = {
 export function middleware(request) {
   // console.log(process.env.VERCEL_PROJECT_PRODUCTION_URL)
   // console.log(request.url)
-  console.log("reber");
+  console.log(request.url);
 
   if (
     request.url === `http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
