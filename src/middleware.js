@@ -1,25 +1,20 @@
 import { NextResponse } from "next/server";
 
-export const config = {matcher: [
-  /*
-   * Match all request paths except for the ones starting with:
-   * - api (API routes)
-   * - _next/static (static files)
-   * - _next/image (image optimization files)
-   * - favicon.ico, sitemap.xml, robots.txt (metadata files)
-   */
-  '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
-],};
+export const config = {
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|images|public).*)",
+  ],
+};
 
 export function middleware(request) {
   // console.log(process.env.VERCEL_PROJECT_PRODUCTION_URL)
   // console.log(request.url)
-  console.log('reber')
+  console.log("reber");
 
   if (
     request.url === `http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
   ) {
-    console.log('reerberbftb')
+    console.log("reerberbftb");
     const url = process.env.VERCEL_PROJECT_PRODUCTION_URL;
     const referer = request.headers.get("referer");
     const allowedReferer = `https://${url}/dashboard`; // Replace with your allowed referer URL
