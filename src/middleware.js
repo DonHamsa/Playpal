@@ -9,10 +9,9 @@ export const config = {
 export function middleware(request) {
   // console.log(process.env.VERCEL_PROJECT_PRODUCTION_URL)
   // console.log(request.url)
-  console.log(`http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`);
 
   if (
-    request.url === `http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
+    request.url === `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
   ) {
     console.log("reerberbftb");
     const url = process.env.VERCEL_PROJECT_PRODUCTION_URL;
