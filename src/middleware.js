@@ -3,12 +3,13 @@ import { NextResponse } from "next/server";
 export const config = {};
 
 export function middleware(request) {
-  console.log(process.env.VERCEL_PROJECT_PRODUCTION_URL)
-  console.log(request.url)
+  // console.log(process.env.VERCEL_PROJECT_PRODUCTION_URL)
+  // console.log(request.url)
 
   if (
     request.url === `http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
   ) {
+    console.log('reerberbftb')
     const url = process.env.VERCEL_PROJECT_PRODUCTION_URL;
     const referer = request.headers.get("referer");
     const allowedReferer = `https://${url}/dashboard`; // Replace with your allowed referer URL
