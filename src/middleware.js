@@ -1,12 +1,11 @@
 import { NextResponse } from "next/server";
 
-export const config = {
-  
-};
+export const config = {};
 
 export function middleware(request) {
-
-  if (request.url === "http://localhost:3000/event") {
+  if (
+    request.url === `http://${process.env.VERCEL_PROJECT_PRODUCTION_URL}/event`
+  ) {
     const url = process.env.VERCEL_PROJECT_PRODUCTION_URL;
     const referer = request.headers.get("referer");
     const allowedReferer = `https://${url}/dashboard`; // Replace with your allowed referer URL
@@ -19,14 +18,12 @@ export function middleware(request) {
   }
 
   const { searchParams } = request.nextUrl;
-  const message = searchParams.get("message");  
+  const message = searchParams.get("message");
 
   const headers = new Headers(request.headers);
-  if  (message){
-    headers.set("x-current-path",message)
+  if (message) {
+    headers.set("x-current-path", message);
   }
 
   return NextResponse.next({ headers });
-
-  
 }
