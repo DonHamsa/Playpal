@@ -205,7 +205,7 @@ export default function Map() {
   }, [selectedParksIndex]);
 
   return (
-    <>
+    <div className="wrapper">
       {showPage && (
         <>
           <Header />
@@ -315,6 +315,6 @@ export default function Map() {
           <FooterTwo />
         </>
       )}
-    </>
+    </div>
   );
 }

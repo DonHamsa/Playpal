@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
         ></link>
       </head>
       <body>
-        <div className="wrapper">{children}</div>
+       {children}
       </body>
     </html>
   );

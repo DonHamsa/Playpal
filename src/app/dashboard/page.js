@@ -11,6 +11,10 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import NotiCards from "../../../components/NotiCards/NotiCards";
 import { format } from "date-fns";
 import MarkerIcon from "../../../components/MarkerIcon/MarkerIcon";
+import { useCallback } from "react";
+import { createToken } from "../Stream/actions";
+
+
 
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
@@ -65,6 +69,7 @@ export default function DashboardPage() {
 
   const supabase = createClient();
 
+  
   useEffect(() => {
     if (formattedPostcode) {
       fetch(
@@ -374,7 +379,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <>
+    <div className="wrapper">
       {userUUID && (
         <>
           <SignedInHeader
@@ -437,6 +442,6 @@ export default function DashboardPage() {
           <FooterTwo />
         </>
       )}
-    </>
+    </div>
   );
 }

@@ -26,7 +26,6 @@ export default function DashboardMap({
   listOfMarkersAndStatus,
   clickedParkCord,
 }) {
-  console.log(clickedParkCord)
   let circlePath;
   let outerBounds;
   const [haveMap, setHaveMap] = useState(false);
@@ -36,7 +35,6 @@ export default function DashboardMap({
 
   const changeOuterBounds = (mapRef) => {
     const bounds = mapRef.current.getBounds();
-    console.log(bounds)
     const ne = bounds.getNorthEast();
     const sw = bounds.getSouthWest();
     return [

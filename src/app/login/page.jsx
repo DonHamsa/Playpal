@@ -11,7 +11,7 @@ const Form = () => {
   const pathname = headerList.get("x-current-path");
   console.log(pathname);
   return (
-    <>
+    <div className="wrapper">
       <Header />
 
       <div className="bigBox">
@@ -42,7 +42,7 @@ const Form = () => {
           </span>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,23 @@
+.chatBody {
+  height: 100%;
+  display: flex;
+  /* border: red 1px solid; */
+
+}
+
+#root {
+  display: flex;
+  /* border: red 1px solid; */
+}
+
+.str-chat__channel-list {
+  width: 30%;
+  /* border: red 1px solid; */
+
+}
+.str-chat__channel {
+  width: 100%;
+}
+.str-chat__thread {
+  width: 45%;
+}
