@@ -11,7 +11,7 @@ export default function SignUp({}) {
     const pathname = headerList.get("x-current-path");
     console.log(pathname);
   return (
-    <>
+    <div className='page'>
       <Header />
 
       <div className="bigBox">
@@ -49,7 +49,7 @@ export default function SignUp({}) {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

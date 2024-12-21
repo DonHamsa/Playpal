@@ -9,6 +9,5 @@ const serverClient = StreamChat.getInstance(
 
 export async function createToken(userId) {
   const token = serverClient.createToken(userId);
-  console.log({ token: token });
   return token;
 }
