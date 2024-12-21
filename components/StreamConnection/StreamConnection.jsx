@@ -1,8 +1,9 @@
 "use client";
 import { createToken } from "@/app/Stream/actions";
 import { useState, useCallback, useEffect } from "react";
-import "./layout.css";
+import ChatLogOut from "../ChatLogOut/ChatLogOut";
 
+import "./layout.css";
 import {
   useCreateChatClient,
   Chat,
@@ -14,11 +15,10 @@ import {
   Thread,
   Window,
 } from "stream-chat-react";
-
 import "stream-chat-react/dist/css/v2/index.css";
 import "./layout.css";
 
-const StreamConnection = ({ userUUID }) => {
+const StreamConnection = ({ userUUID, profileName }) => {
   const [token, setToken] = useState(null);
   const sort = { last_message_at: -1 };
   const filters = {
@@ -44,16 +44,15 @@ const StreamConnection = ({ userUUID }) => {
   useEffect(() => {
     if (client) {
       const createChannel = async () => {
-       const user= await client.connectUser(
-          { id: userUUID }, 
+        const user = await client.connectUser(
+          { id: userUUID, name: profileName },
           token // The token for the user, typically generated server-side
         );
-        console.log(user)
 
-        const channel = client.channel("messaging", {
-          members: [userUUID, "e133191b-13aa-4998-98fa-8f2ff8f37342"],
-        });
-        await channel.create();
+        // const channel = client.channel("messaging", {
+        //   members: [userUUID, "e133191b-13aa-4998-98fa-8f2ff8f37342"],
+        // });
+        // await channel.create();
       };
       createChannel();
     }
@@ -65,6 +64,7 @@ const StreamConnection = ({ userUUID }) => {
 
   return (
     <>
+      <ChatLogOut />
       <div className="chatBody">
         <Chat client={client}>
           <ChannelList filters={filters} sort={sort} options={options} />

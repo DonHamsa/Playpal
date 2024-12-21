@@ -7,11 +7,8 @@ const serverClient = StreamChat.getInstance(
   process.env.STREAM_API_SECRET
 );
 
-
-
 export async function createToken(userId) {
-  const token= serverClient.createToken(userId)
-  console.log({'token': token })
-  return token 
-
+  const token = serverClient.createToken(userId);
+  console.log({ token: token });
+  return token;
 }

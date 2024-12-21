@@ -6,7 +6,7 @@ import { CiUser } from "react-icons/ci";
 import { signOut } from "@/app/login/actions";
 
 
-export default function signedInHeader({ profileName, setProfileCreated }) {
+export default function SignedInHeader({ profileName, setProfileCreated }) {
 
   const signOutFunction=()=>{
     signOut()

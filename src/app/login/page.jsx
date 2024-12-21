@@ -9,7 +9,6 @@ import { headers } from "next/headers";
 const Form = () => {
   const headerList = headers();
   const pathname = headerList.get("x-current-path");
-  console.log(pathname);
   return (
     <div className="wrapper">
       <Header />
