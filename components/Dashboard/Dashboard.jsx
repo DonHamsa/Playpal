@@ -14,6 +14,8 @@ import PlayerCard from "../PlayerCards/PlayerCards";
 import { format } from "date-fns";
 import { createClient } from "../../utils/supabase/client";
 import MarkerIcon from "../MarkerIconMobile/MarkerIconMobile";
+import { FaRegMessage } from "react-icons/fa6";
+import Link from "next/link";
 
 const libraries = ["places", "drawing", "geometry"];
 
@@ -235,7 +237,12 @@ export default function Dashboard({
           </div>
         )}
       </div>
-      <MarkerIcon/>
+      <div className={styles.markerNMessBox}>
+        <MarkerIcon />
+        <Link href='/testing' className={styles.msgIconBox}>
+            <FaRegMessage className={styles.msgIcon} size="26" />
+        </Link>
+      </div>
       <div className={styles.rightSideBox}>
         <div className={styles.rightSideBoxPadded}>
           <div className={styles.mapBoxNHeading}>

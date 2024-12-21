@@ -8,6 +8,10 @@
   /* filter: blur(10px) */
 }
 
+.markerNMessBox {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .gridBox {
     grid-template-columns: none;
@@ -20,11 +24,12 @@
 
 .outsideBox {
   border: 0.5px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all 300ms ease-in-out;
   margin-bottom: 15px;
   height: 300px;
   overflow: hidden;
+
 }
 
 .leftBox {
@@ -35,7 +40,7 @@
 
 .outsideBoxNoScroll {
   border: 0.5px solid grey;
-  border-radius: 5px;
+  border-radius: 10px;
   transition: all 300ms ease-in-out;
   margin-bottom: 15px;
   height: auto;
@@ -110,10 +115,9 @@
   border: 0.5px solid grey;
   padding: 19px;
   padding-top: 7px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 10px;
   height: max-content;
-
 }
 
 .mapText {
@@ -122,15 +126,55 @@
 }
 
 @media (max-width: 900px) {
+
+  .outsideBox{
+    margin-left: 4px;
+    margin-right: 4px
+  }
+
+  .outsideBoxNoScroll{
+    margin-left: 4px;
+    margin-right: 4px
+  }
   .rightSideBoxPadded {
     padding-left: 0;
     width: 100%;
   }
   .mapBoxNHeading {
+    margin-left:2px;
+    margin-right:2px;
+    border-radius: 10px;
     padding-left: 5px;
-    padding-right:0px;
+    padding-right: 0px;
   }
-  .mapText{
-    padding-left:5px;
+  .mapText {
+    padding-left: 5px;
+  }
+  .markerNMessBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: max-content;
+    border-radius: 6px;
+    margin-bottom:15px;
+    border-radius: 10px;
+    gap:10px;
+
+
+  }
+  .msgIcon {
+    /* border: red 1px solid; */
+    height: 100%;
+    color: grey;
+  }
+  .msgIconBox {
+    display: flex;
+    justify-content: center;
+    border:  0.5px solid grey;
+    border-radius: 10px;
+    margin-right:4px;
+
+  }
+  .msgIconBox:hover {
+    background: rgb(251, 251, 251);
   }
 }
