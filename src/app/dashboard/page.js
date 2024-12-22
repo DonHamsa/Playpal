@@ -13,7 +13,8 @@ import { format } from "date-fns";
 import MarkerIcon from "../../../components/MarkerIcon/MarkerIcon";
 import { FaRegMessage } from "react-icons/fa6";
 import Link from "next/link";
-
+import StreamClient from "../Stream/StreamClient/StreamClient";
+import tokenGenerator from "../Stream/Token/TokenGen";
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
 (
@@ -56,6 +57,9 @@ export default function DashboardPage() {
   const [playerPlanningParkName, setPlayerPlanningParkName] = useState(null);
   const [playerStartNEndTime, setPlayerStartNEndTime] = useState(null);
   const [notificationClicked, setNotificationClicked] = useState(false);
+  const [clickedParkId, setClickedParkId] = useState(null);
+  const [listOfNameAndUUIDS, setListOfNamesAndUUIDS] = useState(null);
+  const [listOfMarkersAndStatus, setListOfMarkersAndStatus] = useState(null);
   const [rerun, setRerun] = useState(0);
 
   const [listOfParkIdsNName, setListOfParkIdsNName] = useState(null);
@@ -64,8 +68,34 @@ export default function DashboardPage() {
   const [listOfParksAndRatings, setListOfParksAndRatings] = useState(null);
   const [listOfCentrePoints, setListOfCentrePoints] = useState(null);
   const [clickedParkCord, setClickedParkCord] = useState(null);
+  const [StreamMsgClient, setStreamClient] = useState(null);
 
   const supabase = createClient();
+  useEffect(() => {
+    if (StreamMsgClient && userUUID) {
+      const gettingToken=async ()=> {
+      const userToken = await tokenGenerator(userUUID);
+
+      const connectionPromise = await StreamMsgClient.connectUser(
+        {
+          id: userUUID,
+          name: profileName,
+        },
+        userToken,
+      );
+
+      }
+      gettingToken()
+     
+    }
+  }, [StreamMsgClient, userUUID]);
+
+  useEffect(() => {
+    if (userUUID) {
+      const client = StreamClient(userUUID);
+      setStreamClient(client);
+    }
+  }, [userUUID]);
 
   useEffect(() => {
     if (formattedPostcode) {
@@ -141,7 +171,6 @@ export default function DashboardPage() {
 
         listOfParkIdsNName.map(async (park) => {
           const parkName = park["park_name"];
-          const supabase = createClient();
           const { count, error } = await supabase
             .from("active_players")
             .select("park_id", { count: "exact" })
@@ -162,7 +191,6 @@ export default function DashboardPage() {
   useEffect(() => {
     if (listOfParkIds) {
       const gettingPlayerTableCards = async () => {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from("active_players")
           .select("*")
@@ -180,7 +208,6 @@ export default function DashboardPage() {
   useEffect(() => {
     if (listOfParks.length !== 0) {
       const getListOfParkIds = async () => {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from("parks")
           .select("*")
@@ -203,7 +230,6 @@ export default function DashboardPage() {
   useEffect(() => {
     if (playerPlanningParkId) {
       const gettingParkName = async () => {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from("parks")
           .select("park_name")
@@ -222,7 +248,6 @@ export default function DashboardPage() {
   useEffect(() => {
     if (userUUID) {
       const gettingActivePlayer = async () => {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from("active_players")
           .select("*")
@@ -259,7 +284,6 @@ export default function DashboardPage() {
   useEffect(() => {
     const updateProfile = async () => {
       if (newUserProfileInfo && userUUID) {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from("profile")
           .update({
@@ -287,7 +311,6 @@ export default function DashboardPage() {
         listOfParks.forEach((park) =>
           listOfParksUpsert.push({ park_name: park })
         );
-        const supabase = createClient();
         const { data, error } = await supabase.from("parks").upsert(
           listOfParksUpsert,
           { onConflict: "park_name" } // Ensures conflicts on 'park_name' are ignored
@@ -347,7 +370,6 @@ export default function DashboardPage() {
 
   useEffect(() => {
     const fetchingUserAuthNProfile = async () => {
-      const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -426,6 +448,14 @@ export default function DashboardPage() {
             listOfCentrePoints={listOfCentrePoints}
             setClickedParkCord={setClickedParkCord}
             clickedParkCord={clickedParkCord}
+            clickedParkId={clickedParkId}
+            setClickedParkId={setClickedParkId}
+            listOfNameAndUUIDS={listOfNameAndUUIDS}
+            setListOfNamesAndUUIDS={setListOfNamesAndUUIDS}
+            listOfMarkersAndStatus={listOfMarkersAndStatus}
+            setListOfMarkersAndStatus={setListOfMarkersAndStatus}
+            StreamMsgClient={StreamMsgClient}
+            profileName={profileName}
           />
 
           {listOfParkIdsNName && listOfActivePlayers && (

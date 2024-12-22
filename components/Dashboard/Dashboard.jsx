@@ -37,16 +37,20 @@ export default function Dashboard({
   listOfCentrePoints,
   setClickedParkCord,
   clickedParkCord,
+  clickedParkId,
+  setClickedParkId,
+  listOfNameAndUUIDS,
+  setListOfNamesAndUUIDS,
+  listOfMarkersAndStatus,
+  setListOfMarkersAndStatus,
+  StreamMsgClient,
+  profileName
 }) {
   const { isLoaded: scriptLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY,
     libraries: libraries,
   });
   const supabase = createClient();
-
-  const [clickedParkId, setClickedParkId] = useState(null);
-  const [listOfNameAndUUIDS, setListOfNamesAndUUIDS] = useState(null);
-  const [listOfMarkersAndStatus, setListOfMarkersAndStatus] = useState(null);
 
   useEffect(() => {
     if (listOfParkIds) {
@@ -167,6 +171,7 @@ export default function Dashboard({
                       }
                       return (
                         <PlayerCard
+                          userUUID={userUUID}
                           key={index}
                           name={userName}
                           startTime={startTime}
@@ -174,6 +179,10 @@ export default function Dashboard({
                           hasBall={player["has_ball"]}
                           atPark={player["at_park"]}
                           me={userUUID === player["user_name"] ? true : false}
+                          StreamMsgClient={StreamMsgClient}
+                          listOfNameAndUUIDS={listOfNameAndUUIDS}
+                          profileName={profileName}
+
                         />
                       );
                     }
@@ -209,6 +218,7 @@ export default function Dashboard({
                       }
                       return (
                         <PlayerCard
+                          userUUID={userUUID}
                           key={index}
                           name={userName}
                           startTime={startTime}
@@ -216,6 +226,9 @@ export default function Dashboard({
                           hasBall={player["has_ball"]}
                           atPark={player["at_park"]}
                           me={userUUID === player["user_name"] ? true : false}
+                          StreamMsgClient={StreamMsgClient}
+                          listOfNameAndUUIDS={listOfNameAndUUIDS}
+                          profileName={profileName}
                         />
                       );
                     }
@@ -239,8 +252,8 @@ export default function Dashboard({
       </div>
       <div className={styles.markerNMessBox}>
         <MarkerIcon />
-        <Link href='/testing' className={styles.msgIconBox}>
-            <FaRegMessage className={styles.msgIcon} size="26" />
+        <Link href="/testing" className={styles.msgIconBox}>
+          <FaRegMessage className={styles.msgIcon} size="26" />
         </Link>
       </div>
       <div className={styles.rightSideBox}>

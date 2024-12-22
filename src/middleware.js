@@ -25,6 +25,12 @@ export function middleware(request) {
     }
   }
 
+  if (
+    request.url ===
+    `http://localhost:3000/dashboard`
+  ) {
+    return;
+  }
   const { searchParams } = request.nextUrl;
   const message = searchParams.get("message");
 
