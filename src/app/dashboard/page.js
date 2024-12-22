@@ -11,8 +11,8 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import NotiCards from "../../../components/NotiCards/NotiCards";
 import { format } from "date-fns";
 import MarkerIcon from "../../../components/MarkerIcon/MarkerIcon";
-
-
+import { FaRegMessage } from "react-icons/fa6";
+import Link from "next/link";
 
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
@@ -67,7 +67,6 @@ export default function DashboardPage() {
 
   const supabase = createClient();
 
-  
   useEffect(() => {
     if (formattedPostcode) {
       fetch(
@@ -428,6 +427,13 @@ export default function DashboardPage() {
             setClickedParkCord={setClickedParkCord}
             clickedParkCord={clickedParkCord}
           />
+
+          {listOfParkIdsNName && listOfActivePlayers && (
+            <Link href="/testing" className="msgIconBoxDesktop">
+              <FaRegMessage className="msgIcon" size="26" />
+            </Link>
+          )}
+
           {!profileCreated && (
             <ProfileForm
               setNewUserProfileInfo={setNewUserProfileInfo}

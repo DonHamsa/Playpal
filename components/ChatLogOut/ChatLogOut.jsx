@@ -11,7 +11,7 @@ export default function ChatLogOut() {
   return (
     <div className={styles.bigBox}>
       <Link href='/dashboard' className={styles.backIcon}>
-        <MdOutlineKeyboardBackspace size='55' />
+        <MdOutlineKeyboardBackspace size='47' />
       </Link>
       <div className={styles.outsideBox}>
         <div className={styles.textNIcon} onClick={() => signOutFunction()}>

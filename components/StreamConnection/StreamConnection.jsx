@@ -59,7 +59,7 @@ const StreamConnection = ({ userUUID, profileName }) => {
   }, [client]);
 
   if (!client) {
-    return <div>Setting up client & connection...</div>;
+    return ;
   }
 
   return (

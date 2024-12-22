@@ -1,6 +1,7 @@
 .bigBox {
   display: flex;
   justify-content: space-between;
+  /* border: red 1px solid; */
 }
 
 .outsideBox {
@@ -13,9 +14,11 @@
 
 .backIcon {
   line-height: 100%;
-  color: grey;
+  color: rgb(82, 80, 80);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  /* border: red 1px solid; */
+  padding-top: 10px;
 }
 
 .image {
