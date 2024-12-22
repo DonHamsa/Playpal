@@ -23,3 +23,10 @@
 .str-chat__thread {
   width: 45%;
 }
+
+
+@media (max-width: 900px) {
+  .chatBody {
+   height:100%;
+  }
+}
