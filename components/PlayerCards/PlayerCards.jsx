@@ -84,6 +84,7 @@ export default function PlayerCard({
               className={styles.messIcon}
               size="14px"
               onTouchStart={onClickHandler}
+              onClick={onClickHandler}
             />
           )}
           <p className={styles.time}>
