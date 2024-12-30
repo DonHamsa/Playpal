@@ -2,7 +2,6 @@
 import StreamConnection from "../../../components/StreamConnection/StreamConnection";
 import { useState, useEffect } from "react";
 import { createClient } from "../../../utils/supabase/client";
-
 const App = () => {
   const supabase = createClient();
   const [userUUID, setUserUUID] = useState(false);
@@ -30,7 +29,7 @@ const App = () => {
           .select("*")
           .eq("id", userUUID);
         if (data) {
-          setProfileName(data[0]['display_name']);
+          setProfileName(data[0]["display_name"]);
         } else {
           console.log(error);
         }
@@ -43,7 +42,12 @@ const App = () => {
     return;
   }
 
-  return <StreamConnection userUUID={userUUID} profileName={profileName}></StreamConnection>;
+  return (
+    <StreamConnection
+      userUUID={userUUID}
+      profileName={profileName}
+    ></StreamConnection>
+  );
 };
 
 export default App;

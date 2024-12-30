@@ -137,7 +137,7 @@ export default function DashboardPage() {
         "postgres_changes",
         { event: "*", schema: "public", table: "active_players" },
         (payload) => {
-          // console.log(payload);
+          console.log(payload);
           setRerun((previousValue) => previousValue + 1);
         }
       )

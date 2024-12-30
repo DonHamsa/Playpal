@@ -48,18 +48,13 @@ const StreamConnection = ({ userUUID, profileName }) => {
           { id: userUUID, name: profileName },
           token // The token for the user, typically generated server-side
         );
-
-        // const channel = client.channel("messaging", {
-        //   members: [userUUID, "e133191b-13aa-4998-98fa-8f2ff8f37342"],
-        // });
-        // await channel.create();
       };
       createChannel();
     }
   }, [client]);
 
   if (!client) {
-    return ;
+    return;
   }
 
   return (
