@@ -252,7 +252,7 @@ export default function Dashboard({
       </div>
       <div className={styles.markerNMessBox}>
         <MarkerIcon />
-        <Link href="/testing" className={styles.msgIconBox}>
+        <Link href="/chat" className={styles.msgIconBox}>
           <FaRegMessage className={styles.msgIcon} size="26" />
         </Link>
       </div>

@@ -466,7 +466,7 @@ export default function DashboardPage() {
           />
 
           {listOfParkIdsNName && listOfActivePlayers && (
-            <Link href="/testing" className="msgIconBoxDesktop">
+            <Link href="/chat" className="msgIconBoxDesktop">
               <FaRegMessage className="msgIcon" size="26" />
             </Link>
           )}

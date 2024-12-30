@@ -32,7 +32,7 @@ export default function PlayerCard({
     });
     await channel.create();
 
-    router.push("/testing");
+    router.push("/chat");
   };
 
   return (

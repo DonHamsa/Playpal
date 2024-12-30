@@ -29,4 +29,7 @@
   .chatBody {
    height:93%;
   }
+  .str-chat__channel-list {
+    width: 100%;
+}
 }
