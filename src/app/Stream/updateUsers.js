@@ -1,3 +1,5 @@
+'use server'
+
 import { StreamChat } from "stream-chat";
 
 const serverClient = StreamChat.getInstance(
@@ -5,13 +7,12 @@ const serverClient = StreamChat.getInstance(
   process.env.STREAM_API_SECRET
 );
 
-const updateUsers = async () => {
+const updateUser = async (uuid, profileName) => {
   const updateResponse = await serverClient.upsertUser({
-    id: "5f99c736-3fd1-4d38-8cbc-e33c40d9f201",
-    name: "idiot",
+    id: uuid,
+    name: profileName
   });
-
   console.log(updateResponse);
 };
 
-export default updateUsers;
+export default updateUser;

@@ -12,10 +12,26 @@ export default function PlayerCard({
   endTime,
   hasBall,
   me,
+  StreamMsgClient,
+  listOfNameAndUUIDS,
+  userUUID,
+  profileName,
 }) {
   const router = useRouter();
 
   const onClickHandler = async () => {
+    let playerUUID;
+    listOfNameAndUUIDS.map((player) => {
+      if (player["display_name"] === name) {
+        playerUUID = player["id"];
+      }
+    });
+
+    const channel = StreamMsgClient.channel("messaging", {
+      members: [playerUUID, userUUID],
+    });
+    await channel.create();
+
     router.push("/testing");
   };
 

@@ -15,6 +15,8 @@ import { FaRegMessage } from "react-icons/fa6";
 import Link from "next/link";
 import StreamClient from "../Stream/StreamClient/StreamClient";
 import tokenGenerator from "../Stream/Token/TokenGen";
+import updateUsers from "../Stream/updateUsers";
+
 const overpassQuery = (lat, lng) => {
   const request = `[out:json];
 (
@@ -71,24 +73,29 @@ export default function DashboardPage() {
   const [StreamMsgClient, setStreamClient] = useState(null);
 
   const supabase = createClient();
+
   useEffect(() => {
-    if (StreamMsgClient && userUUID) {
-      const gettingToken=async ()=> {
-      const userToken = await tokenGenerator(userUUID);
+    if (StreamMsgClient && userUUID && profileName) {
+      const gettingToken = async () => {
+        const userToken = await tokenGenerator(userUUID);
 
-      const connectionPromise = await StreamMsgClient.connectUser(
-        {
-          id: userUUID,
-          name: profileName,
-        },
-        userToken,
-      );
+        const connectionPromise = await StreamMsgClient.connectUser(
+          {
+            id: userUUID,
+            name: profileName,
+          },
+          userToken
+        );
 
-      }
-      gettingToken()
-     
+        updateUsers(userUUID, profileName);
+
+        const response = await StreamMsgClient.queryUsers({});
+
+        console.log(response);
+      };
+      gettingToken();
     }
-  }, [StreamMsgClient, userUUID]);
+  }, [StreamMsgClient, userUUID, profileName]);
 
   useEffect(() => {
     if (userUUID) {

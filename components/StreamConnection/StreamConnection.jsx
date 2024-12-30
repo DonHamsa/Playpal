@@ -20,11 +20,14 @@ import "./layout.css";
 
 const StreamConnection = ({ userUUID, profileName }) => {
   const [token, setToken] = useState(null);
+
   const sort = { last_message_at: -1 };
+
   const filters = {
     type: "messaging",
     members: { $in: [userUUID] },
   };
+
   const options = {
     limit: 10,
   };
@@ -35,6 +38,7 @@ const StreamConnection = ({ userUUID, profileName }) => {
     return token;
   }, [userUUID]);
 
+
   let client = useCreateChatClient({
     apiKey: process.env.NEXT_PUBLIC_STREAM_API_KEY,
     tokenOrProvider: tokenProvider,
@@ -43,13 +47,13 @@ const StreamConnection = ({ userUUID, profileName }) => {
 
   useEffect(() => {
     if (client) {
-      const createChannel = async () => {
+      const logInStream = async () => {
         const user = await client.connectUser(
           { id: userUUID, name: profileName },
           token // The token for the user, typically generated server-side
         );
       };
-      createChannel();
+      logInStream();
     }
   }, [client]);
 
